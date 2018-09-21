@@ -36,15 +36,16 @@ in the root folder of repo run
         notice the dot(.) in above command at the end
         Note: it is better to use virtualenv and pip3 (python3)
 
-Autocomplete for any shell
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+Setup Autocomplete
+~~~~~~~~~~~~~~~~~~
+see
 
     ::
 
-        termicoder setup autocomplete --help
+        termicoder config autocomplete --help
 
-Generate man pages for termicoder
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Generate man pages
+~~~~~~~~~~~~~~~~~~
 
     ::
 
