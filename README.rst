@@ -96,7 +96,7 @@ or you can have a look at `help_text <https://github.com/diveshuttam/termicoder/
             setup   sets up problem, contests and login.
             submit  submit a solution.
             test    test code against the sample testcases.
-            view    view contests, problems ad problem statement
+            view    view contests, problems and problem statement
 
 Contribute
 ----------

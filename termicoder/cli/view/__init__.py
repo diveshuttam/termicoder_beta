@@ -12,7 +12,7 @@ from . import this
 @click.group(cls=DefaultGroup, default='this', default_if_no_args=False)
 def main():
     '''
-    view contests, problems ad problem statement
+    view contests, problems and problem statement
     '''
     pass
 
