@@ -1,6 +1,7 @@
 import click
+OJs = []
 
-OJs=[]
+
 @click.command(short_help="display contest list of a judge")
 @click.option('-j', '--judge', type=click.Choice(OJs),
               prompt="Please provide a judge("+'|'.join(OJs)+")")

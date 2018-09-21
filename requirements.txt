@@ -2,3 +2,4 @@ Click
 requests
 beautifulsoup4
 flask
+flake8

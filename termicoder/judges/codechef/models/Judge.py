@@ -1,5 +1,6 @@
 #!/usr/bin/python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 
 class Judge:
     def __init__(self):
@@ -21,4 +22,3 @@ class Judge:
 
     def submit(self, ):
         pass
-

@@ -1,5 +1,6 @@
 #!/usr/bin/python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 
 class Contest:
     def __init__(self):
@@ -14,9 +15,9 @@ class Contest:
 
     def refreshContest(self, ):
         pass
-    
+
     def view_local(self, ):
         pass
-    
-    def view_online()
 
+    def view_online():
+        pass

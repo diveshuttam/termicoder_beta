@@ -1,6 +1,8 @@
 import click
 
 OJs = []
+
+
 @click.command()
 @click.option('-j', '--judge', type=click.Choice(OJs),
               prompt="Please provide a judge("+'|'.join(OJs)+")")
@@ -24,4 +26,4 @@ def main(judge, contest, problem, status):
     all this happens in the current folder.
     option of contest/category may vary amongst various online judges
     """
-    #eval(judge).setup(contest, problem, status)
+    # eval(judge).setup(contest, problem, status)

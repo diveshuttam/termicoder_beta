@@ -59,7 +59,7 @@ Autocomplete for bash
 
  	    Method 2 makes bash to load up slowly, so try:
   	    eval "$(_TERMICODER_COMPLETE=source termicoder)" > autocomplete.sh
-  	    and put . path_to_autocompte.sh/autocomplete.sh in your .bashrc
+  	    and put . path_to_autocomplete.sh/autocomplete.sh in your .bashrc
 
 Current Support
 ---------------
@@ -79,7 +79,7 @@ Languages Supported Currently:
 Usage
 -----
 Only commands highlighted here,
-for details we reccommend going through `sample run <https://github.com/diveshuttam/termicoder/blob/master/documentation/samplerun.md>`_ which contains detailed usage
+for details we recommend going through `sample run <https://github.com/diveshuttam/termicoder/blob/master/documentation/samplerun.md>`_ which contains detailed usage
 
 for details of a particular command use
 
@@ -88,7 +88,7 @@ for details of a particular command use
         termicoder --help
         termicoder <COMMAND> --help  
 	
-or you can have a look at `helptext <https://github.com/diveshuttam/termicoder/blob/master/documentation/helptext.md>`_ which contains the output of all help commands
+or you can have a look at `help_text <https://github.com/diveshuttam/termicoder/blob/master/documentation/helptext.md>`_ which contains the output of all help commands
 
     ::
 

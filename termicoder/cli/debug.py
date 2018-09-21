@@ -1,5 +1,6 @@
 import click
 
+
 @click.command()
 def main():
     '''
@@ -10,7 +11,6 @@ def main():
     '''
     click.echo(
         'This functionality is not implemented in this version\n' +
-        'The command is only kept for compactiblity with future versions\n' +
-        'If you want to contribute to its developement visit:\n' +
+        'The command is only kept for compatibility with future versions\n' +
+        'If you want to contribute to its development visit:\n' +
         'https://termicoder.github.io/')
-

@@ -1,31 +1,36 @@
-from .view.main import main as view
-from .code import main as code
-from .debug import main as debug
-from .setup import main as setup
-from .submit import main as submit
-from .test import main as test
+from .view import main as view
+from . import code
+from . import debug
+from . import setup
+from . import submit
+from . import test
 
 __commands__ = [
     {
-        "cmd": code,
+        "cmd": code.main,
         "name": "code"
     },
     {
-        "cmd": debug,
+        "cmd": debug.main,
         "name": "debug"
     },
     {
-        "cmd": setup,
+        "cmd": setup.main,
         "name": "setup"
     },
     {
-        "cmd": submit,
+        "cmd": submit.main,
         "name": "submit"
     },
     {
-        "cmd": test,
+        "cmd": test.main,
         "name": "test"
+    },
+    {
+        "cmd": view.main,
+        "name": "view"
     }
 ]
+
 # TODO use sort __commands__ here so that no need to worry
-__all__ = ["code", "debug", "setup", "submit", "view", "__commands__"]
+__all__ = ["__commands__"]

@@ -1,5 +1,6 @@
 import click
-from . import *
+from . import __commands__ as commands
+
 
 # view command has various subcommands
 @click.group()
@@ -9,5 +10,6 @@ def main():
     '''
     pass
 
-for command_name in __commands__:
-    main.add_command(command_name)
+
+for command_name in commands:
+    main.add_command(**command_name)

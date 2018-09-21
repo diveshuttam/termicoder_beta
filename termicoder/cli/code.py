@@ -1,4 +1,6 @@
 import click
+
+
 @click.command()
 @click.option('-f', '--file', 'code_file',
               type=click.Path(writable=True, readable=False, dir_okay=False),
@@ -25,4 +27,3 @@ def main(code_file, edit_templates, edit_defaults):
 
     # if(code_file is not None):
     #     code_module.code(code_file)
-

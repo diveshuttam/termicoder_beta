@@ -1,5 +1,6 @@
 #!/usr/bin/python
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 
 class Problem:
     def __init__(self):
@@ -8,4 +9,3 @@ class Problem:
         self.tags = None
         self.author = None
         self.date_added = None
-
