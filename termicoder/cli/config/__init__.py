@@ -6,13 +6,7 @@ OJs = []
 
 
 @click.group()
-@click.option('-j', '--judge', type=click.Choice(OJs))
-#              prompt="Please provide a judge("+'|'.join(OJs)+")")
-@click.option('-c', '--contest', type=click.STRING, help="contest code")
-@click.option('-p', '--problem', type=click.STRING, help="problem code")
-@click.option('--login', 'status', flag_value='login')
-@click.option('--logout', 'status', flag_value='logout')
-def main(judge, contest, problem, status):
+def main():
     """
     configure termicoder settings, autocomplete etc.
     """

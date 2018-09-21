@@ -24,7 +24,9 @@ click_completion.init()
 
 
 cmd_help = """Shell completion for termicoder.
+
 Available shell types:
+
 \b
   %s
 Default type: auto
