@@ -14,6 +14,7 @@ def main(code_file):
     script will prompt you to login into the judge(if not already).
     this submits the problem using data in [.problem] file in current directory
     '''
+    raise NotImplementedError
     # judge = parse.get_judge()
     # if(not code_file):
     #     code_file = parse.get_code_file()

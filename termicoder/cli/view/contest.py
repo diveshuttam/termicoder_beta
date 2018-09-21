@@ -12,4 +12,4 @@ def main(judge):
     depending on judge it may give a list of categories also
     such as PRACTICE etc.
     '''
-    # eval(judge).view_contests()
+    raise NotImplementedError

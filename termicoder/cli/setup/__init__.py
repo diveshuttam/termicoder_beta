@@ -3,9 +3,9 @@ import click
 OJs = []
 
 
-@click.command()
-@click.option('-j', '--judge', type=click.Choice(OJs),
-              prompt="Please provide a judge("+'|'.join(OJs)+")")
+@click.group()
+@click.option('-j', '--judge', type=click.Choice(OJs))
+#              prompt="Please provide a judge("+'|'.join(OJs)+")")
 @click.option('-c', '--contest', type=click.STRING, help="contest code")
 @click.option('-p', '--problem', type=click.STRING, help="problem code")
 @click.option('--login', 'status', flag_value='login')
@@ -26,4 +26,8 @@ def main(judge, contest, problem, status):
     all this happens in the current folder.
     option of contest/category may vary amongst various online judges
     """
+    raise NotImplementedError
     # eval(judge).setup(contest, problem, status)
+
+
+__all__ = ['main']

@@ -16,9 +16,9 @@ setup(
     author='Divesh Uttamchandani',
     author_email='diveshuttamchandani@gmail.com',
     license='MIT',
-    description='a CLI to view, code and submit problems directly from terminal',
+    description='CLI to view, code & submit problems directly from terminal',
     long_description=readme(),
-    keywords='competetive iarcs codechef oj',
+    keywords='competitive iarcs codechef oj',
     classifiers=[
         'Development Status :: 3 - Alpha',
 
@@ -38,9 +38,12 @@ setup(
         'Click',
         'requests',
         'beautifulsoup4',
+        'click-default-group',
+        'click-repl',
+        'click_completion'
     ],
     entry_points='''
         [console_scripts]
-        termicoder=termicoder.cli.main:main
+        termicoder=termicoder.cli:main
     '''
 )

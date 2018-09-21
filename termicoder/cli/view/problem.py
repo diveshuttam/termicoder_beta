@@ -10,4 +10,5 @@ def main(judge, contest):
     '''
     lists problems of a contest/category on the judge
     '''
+    raise NotImplementedError
     # eval(judge).view_problems(contest)

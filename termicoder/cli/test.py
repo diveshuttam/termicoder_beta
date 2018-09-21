@@ -21,6 +21,7 @@ def main(code_file, edit_scripts, timelimit, live):
     it displays time for each testcase,status
     and diff of expected and produced outputs.
     '''
+    raise NotImplementedError
     # if(edit_scripts):
     #     test_module.edit_scripts()
 

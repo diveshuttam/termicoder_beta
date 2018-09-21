@@ -16,6 +16,7 @@ def main(code_file, edit_templates, edit_defaults):
     you can edit template code and default editors
     using flags -et and -ed respectively
     '''
+    raise NotImplementedError
     # if(edit_templates):
     #     code_module.edit_templates()
 
