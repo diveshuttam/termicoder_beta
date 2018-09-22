@@ -10,15 +10,28 @@ from . import repl
 from . import config
 from . import ls
 
+CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
-# TODO print termicoder ascii art (termicoder.constants.ascii_art)
-# by adding it correctly to click's help
-@click.group()
-def main():
+
+@click.group(context_settings=CONTEXT_SETTINGS)
+@click.option('--debug', is_flag=True, default=False,
+              help='Turn on debug messages for Termicoder.')
+@click.version_option()
+def main(debug):
     '''
+    \b
+    __       __                      _                __
+    \ \     / /____  _________ ___  (_)________  ____/ /__  _____
+     \ \   / __/ _ \/ ___/ __ `__ \/ / ___/ __ \/ __  / _ \/ ___/
+     / /  / /_/  __/ /  / / / / / / / /__/ /_/ / /_/ /  __/ /
+    /_/   \__/\___/_/  /_/ /_/ /_/_/\___/\____/\__,_/\___/_/
+
     view, code & submit problems directly from terminal.
     '''
-    pass
+    if(debug):
+        print('hello')
+    else:
+        print('hi')
 
 
 sub_commands = [
@@ -60,9 +73,7 @@ sub_commands = [
     }
 ]
 
-# TODO use sort __commands__ here so that no need to worry
-# __commands__ is defined in __init__.py contains all commands bindings
-# with their names
+
 for command in sub_commands:
     main.add_command(**command)
 
