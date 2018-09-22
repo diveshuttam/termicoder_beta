@@ -9,13 +9,14 @@ from . import test
 from . import repl
 from . import config
 from . import ls
+from ..models.JudgeFactory import JudgeFactory
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.option('--debug', is_flag=True, default=False,
-              help='Turn on debug messages for Termicoder.')
+              help='Turn on debug messages for Termicoder.', is_eager=True)
 @click.version_option()
 def main(debug):
     '''
@@ -28,10 +29,7 @@ def main(debug):
 
     view, code & submit problems directly from terminal.
     '''
-    if(debug):
-        print('hello')
-    else:
-        print('hi')
+    return None
 
 
 sub_commands = [
@@ -76,5 +74,7 @@ sub_commands = [
 
 for command in sub_commands:
     main.add_command(**command)
+
+JudgeFactory()
 
 __all__ = ["main"]

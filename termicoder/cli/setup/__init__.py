@@ -14,10 +14,10 @@ def main(judge, contest, problem, status):
     """
     sets up problem, contests and login.
 
-    1. if you pass judge and --login/--logout,
+    1. If you pass judge and --login/--logout,
     it logs you in and out of the judge
 
-    2. if you pass judge and contest/category
+    2. If you pass judge and contest/category
     it downloads all the problems of that contest.
 
     3. if you pass a particular problem, with judge and contest/category,

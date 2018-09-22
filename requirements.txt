@@ -3,3 +3,6 @@ requests
 beautifulsoup4
 flask
 flake8
+click-man
+sphinx
+sphinx-click

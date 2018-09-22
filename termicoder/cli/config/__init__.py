@@ -8,10 +8,10 @@ OJs = []
 @click.group()
 def main():
     """
-    configure termicoder settings, autocomplete etc.
+    Configure settings, autocomplete etc.
     """
 #    raise NotImplementedError
-    # eval(judge).setup(contest, problem, status)
+#    eval(judge).setup(contest, problem, status)
 
 
 sub_commands = [

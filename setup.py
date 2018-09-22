@@ -45,5 +45,8 @@ setup(
     entry_points='''
         [console_scripts]
         termicoder=termicoder.cli:main
+        [termicoder.judge_plugins]
+        codechef=termicoder.judges.codechef:Codechef
+        iarcs=termicoder.judges.iarcs:Iarcs
     '''
 )

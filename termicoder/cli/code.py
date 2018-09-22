@@ -2,19 +2,30 @@ import click
 
 
 @click.command()
-@click.option('-f', '--file', 'code_file',
+@click.argument('FILE', 'code_file',
               type=click.Path(writable=True, readable=False, dir_okay=False),
-              help="the filename to code into with preloaded template")
-@click.option('-et', "--edit_templates", is_flag=True, default=False,
-              help="open templates folder")
-@click.option('-ed', "--edit_defaults", is_flag=True, default=False,
-              help="edit defaults for editors")
-def main(code_file, edit_templates, edit_defaults):
+              required=False)
+@click.option('--editor', type=click.STRING, help="Specify the editor to launch the file with.")
+def main(code_file, editor):
     '''
-    creates & open code file with template code.
+    Creates and opens FILE with template code.
 
-    you can edit template code and default editors
-    using flags -et and -ed respectively
+    If FILE already exists, 'code' just opens it in the default
+    default/supplied editor without any change.
+
+    If FILE is not passed a default name of file is suggested
+    based on current directory, language preferences and existing
+    files in directory.
+
+    Default FILE is <PROBLEM_NAME>.<DEFAULT_EXTENSION> if user is
+    in a problem folder and no other supported code file exists.
+    If other code file(s) exist, it suggests to open the most
+    recently edited one.
+
+    Template for the code is loaded based upon extension.
+
+    See 'termicoder config' for editing default templates,
+    editor, and language preferences.
     '''
     raise NotImplementedError
     # if(edit_templates):
