@@ -8,11 +8,12 @@ from . import submit
 from . import test
 from . import repl
 from . import config
+from . import ls
+
 
 # TODO print termicoder ascii art (termicoder.constants.ascii_art)
 # by adding it correctly to click's help
-
-@click.group(short_help='hello')
+@click.group()
 def main():
     '''
     view, code & submit problems directly from terminal.
@@ -52,6 +53,10 @@ sub_commands = [
     {
         "cmd": config.main,
         "name": "config"
+    },
+    {
+        "cmd": ls.main,
+        "name": "list"
     }
 ]
 
