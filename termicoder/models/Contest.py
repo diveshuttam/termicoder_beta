@@ -1,8 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+# ABC is the AbstractBaseClass in python
+from abc import ABC, abstractmethod
 
-class Contest:
+class Contest(ABC):
+    @abstractmethod
     def __init__(self):
         self.name = None
         self.url = None

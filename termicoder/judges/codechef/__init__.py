@@ -1,4 +1,4 @@
-from ...models.Judge import Judge
+from ...models import Judge
 
 
 class Codechef(Judge):
