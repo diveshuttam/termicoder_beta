@@ -1,16 +1,18 @@
 import click
+from ...models import JudgeFactory
 
-OJs = []
+judge_factory = JudgeFactory()
+OJs = judge_factory.available_judges
 
 
 @click.group()
-@click.option('-j', '--judge', type=click.Choice(OJs))
-#              prompt="Please provide a judge("+'|'.join(OJs)+")")
+@click.option('-j', '--judge', 'judge_name', type=click.Choice(OJs),
+              prompt="Please provide a judge("+'|'.join(OJs)+")")
 @click.option('-c', '--contest', type=click.STRING, help="contest code")
 @click.option('-p', '--problem', type=click.STRING, help="problem code")
 @click.option('--login', 'status', flag_value='login')
 @click.option('--logout', 'status', flag_value='logout')
-def main(judge, contest, problem, status):
+def main(judge_name, contest, problem, status):
     """
     sets up problem, contests and login.
 
@@ -26,8 +28,15 @@ def main(judge, contest, problem, status):
     all this happens in the current folder.
     option of contest/category may vary amongst various online judges
     """
-    raise NotImplementedError
-    # eval(judge).setup(contest, problem, status)
+    judge = judge_factory.get_judge(judge_name)
+    if(status == 'login'):
+        judge.login()
+    elif(status == 'logout'):
+        judge.logout()
+    if(problem):
+        problem = judge.get_problem(contest, problem)
+    elif(contest and not problem):
+        contest = judge.get_contest(contest)
 
 
 __all__ = ['main']

@@ -9,7 +9,7 @@ from . import test
 from . import repl
 from . import config
 from . import ls
-from ..models.JudgeFactory import JudgeFactory
+from . import clip
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -29,7 +29,6 @@ def main(debug):
 
     view, code & submit problems directly from terminal.
     '''
-    return None
 
 
 sub_commands = [
@@ -68,6 +67,10 @@ sub_commands = [
     {
         "cmd": ls.main,
         "name": "list"
+    },
+    {
+        "cmd": clip.main,
+        "name": "clip"
     }
 ]
 
@@ -75,6 +78,5 @@ sub_commands = [
 for command in sub_commands:
     main.add_command(**command)
 
-JudgeFactory()
 
 __all__ = ["main"]

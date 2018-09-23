@@ -13,7 +13,7 @@ def main(code_file, editor):
     If FILE already exists, 'code' just opens it in the default
     default/supplied editor without any change.
 
-    If FILE is not passed a default name of file is suggested
+    If FILE is not passed, a default name of file is suggested
     based on current directory, language preferences and existing
     files in directory.
 

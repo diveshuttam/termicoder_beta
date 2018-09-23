@@ -46,7 +46,7 @@ setup(
         [console_scripts]
         termicoder=termicoder.cli:main
         [termicoder.judge_plugins]
-        codechef=termicoder.judges.codechef:Codechef
-        iarcs=termicoder.judges.iarcs:Iarcs
+        codechef=termicoder.judges:Codechef
+        iarcs=termicoder.judges:Iarcs
     '''
 )

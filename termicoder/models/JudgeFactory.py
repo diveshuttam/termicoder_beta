@@ -1,6 +1,7 @@
 # for loading judge plugins
 from pkg_resources import iter_entry_points
 from . import Judge
+from ..utils.Errors import JudgeNotFoundError
 
 
 class JudgeFactory:
@@ -15,7 +16,7 @@ class JudgeFactory:
             try:
                 judge_class = judge.load()
                 assert(issubclass(judge_class, Judge))
-                # Try instantiating judge to see if abstract methods are implemented
+                # Try instantiating judge to check if abstract methods are implemented
                 judge_class()
                 self.available_judges.append(judge.name)
             # TODO log about 'why could not load judge'
@@ -27,9 +28,13 @@ class JudgeFactory:
                 pass
             except:
                 raise
+
         # sorting judges for statefulness
         self.available_judges.sort()
 
     def get_judge(self, judge_name):
         if(judge_name not in available_judges):
-            raise JudgeNotFound
+            raise JudgeNotFoundError
+        else:
+            # Return an instance of the judge
+            return self._judge_classes[judge_name]()
