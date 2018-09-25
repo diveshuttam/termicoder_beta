@@ -10,19 +10,19 @@ class Codechef(Judge):
         self.user = None
 
     def login(self, ):
-        pass
+        raise NotImplementedError
 
     def logout(self,):
-        pass
+        raise NotImplementedError
 
-    def getRunningContests(self, ):
-        pass
+    def get_running_contests(self, ):
+        raise NotImplementedError
 
-    def setupContest(self, contest_code):
-        pass
+    def get_contest(self, contest_code):
+        raise NotImplementedError
 
-    def setupProblem(self, problem_code):
-        pass
+    def get_problem(self, contest_code, problem_code):
+        raise NotImplementedError
 
     def submit(self, ):
         pass

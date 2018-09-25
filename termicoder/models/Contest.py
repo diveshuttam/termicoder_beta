@@ -13,14 +13,23 @@ class Contest(ABC):
         self.end_time = None
         self.problems = None
 
-    def getProblems(self, ):
+
+    @abstractmethod
+    def get_problems(self, ):
         pass
 
-    def refreshContest(self, ):
+    @abstractmethod
+    def refresh_contest(self, ):
         pass
 
-    def view_local(self, ):
+    @abstractmethod
+    def view_local(self):
         pass
 
-    def view_online():
+    @abstractmethod
+    def view_online(self):
+        pass
+
+    @abstractmethod
+    def save_local(self):
         pass

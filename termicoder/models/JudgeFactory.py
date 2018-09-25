@@ -20,12 +20,13 @@ class JudgeFactory:
                 judge_class()
                 self.available_judges.append(judge.name)
             # TODO log about 'why could not load judge'
+            # also pass the exception instead of raising
             except AssertionError as e:
                 # Not a subclass
-                pass
+                raise
             except TypeError as e:
                 # Abstract methods are not implemented
-                pass
+                raise
             except:
                 raise
 
