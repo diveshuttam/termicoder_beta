@@ -4,10 +4,12 @@ from . import Judge
 from ..utils.Errors import JudgeNotFoundError
 
 
+# Takes care of instantiating judges and keeping their session_data
+# Decorates login logout methods of the judges to write session data
 class JudgeFactory:
     def __init__(self):
         self.available_judges = []
-        self._judge_classes = []
+        self._judge_classes = {}
         self._load_judges()
 
     def _load_judges(self):
@@ -16,9 +18,20 @@ class JudgeFactory:
             try:
                 judge_class = judge.load()
                 assert(issubclass(judge_class, Judge))
-                # Try instantiating judge to check if abstract methods are implemented
-                judge_class()
+                # Try instantiating judge to check if abstract methods
+                #  are implemented
+                # TODO: see for a better alternative instead of instantiating
                 self.available_judges.append(judge.name)
+                judge_class()
+
+                # decorate login and logout with _write_session_data
+                judge_class.login = self._write_session_data(
+                    judge.name)(judge_class.login)
+                judge_class.logout = self._write_session_data(
+                    judge.name)(judge_class.logout)
+
+                self._judge_classes[judge.name] = judge_class
+
             # TODO log about 'why could not load judge'
             # also pass the exception instead of raising
             except AssertionError as e:
@@ -27,15 +40,27 @@ class JudgeFactory:
             except TypeError as e:
                 # Abstract methods are not implemented
                 raise
-            except:
+            except BaseException:
                 raise
 
         # sorting judges for statefulness
         self.available_judges.sort()
 
     def get_judge(self, judge_name):
-        if(judge_name not in available_judges):
+        if(judge_name not in self.available_judges):
             raise JudgeNotFoundError
         else:
             # Return an instance of the judge
-            return self._judge_classes[judge_name]()
+            # TODO load session data if available
+
+            return self._judge_classes[judge_name](session_data=None)
+
+    def _write_session_data(self, judge_name):
+        def decorator(function):
+            def decorated_function(self_, *args, **kwargs):
+                function(self_, *args, **kwargs)
+                # TODO save to the appropriate location
+                print(self_.session_data)
+                print(judge_name)
+            return decorated_function
+        return decorator

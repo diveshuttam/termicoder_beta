@@ -9,6 +9,9 @@ class Iarcs(Judge):
         self.url = None
         self.user = None
 
+    def check_login(self):
+        pass
+
     def login(self, ):
         pass
 
