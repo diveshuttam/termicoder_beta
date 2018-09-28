@@ -45,6 +45,7 @@ setup(
         'requests_oauthlib',
         'pyyaml',
         'click-log',
+        'pyperclip'
     ],
     entry_points='''
         [console_scripts]

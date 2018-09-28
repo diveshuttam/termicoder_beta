@@ -1,5 +1,5 @@
 import click
-import os
+from ...config import get_config_path
 
 
 @click.command()
@@ -10,10 +10,5 @@ def main():
     Launches the config folder for modifying settings.
     """
 
-    config_path = click.get_app_dir('termicoder')
-    if(os.path.exists(config_path)):
-        click.launch(config_path)
-    else:
-        msg = "Could not find config folder: '{config_path}'\n".format(
-            config_path=config_path) + "Run `termicoder config init` first!"
-        raise click.UsageError(msg)
+    config_path = get_config_path(ensure_exists=True)
+    click.launch(config_path)

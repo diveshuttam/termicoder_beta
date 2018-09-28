@@ -3,6 +3,7 @@ import os
 import termicoder.data.config as config_data
 import shutil
 from ...utils.logging import logger
+from ...config import get_config_path
 
 
 @click.command()
@@ -11,7 +12,7 @@ def main():
     Initialize the config directory.
     """
 
-    config_path = click.get_app_dir('termicoder')
+    config_path = get_config_path()
     logger.info("Setting up configuration at '{config_dest}'".format(
         config_dest=config_path))
 

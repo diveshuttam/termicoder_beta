@@ -3,6 +3,7 @@ from . import autocomplete
 from . import init
 from . import man
 from . import edit
+from . import remove
 
 
 @click.group()
@@ -30,6 +31,10 @@ sub_commands = [
     {
         "cmd": edit.main,
         "name": "edit"
+    },
+    {
+        "cmd": remove.main,
+        "name": "remove"
     }
 ]
 

@@ -11,13 +11,14 @@ from . import config
 from . import ls
 from . import clip
 from ..utils.logging import logger
+from ..config import check_config_path
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option()
-@click_log.simple_verbosity_option(logger)
+@click_log.simple_verbosity_option(logger, envvar='TERMICODER_VERBOSITY')
 def main():
     '''
     \b
@@ -29,6 +30,12 @@ def main():
 
     view, code & submit problems directly from terminal.
     '''
+    if(check_config_path() is False):
+        logger.warn(
+            "Termicoder config has not been initialized\n"
+            "Some features might not work\n"
+            "Run `termicoder config init` to access all features"
+        )
 
 
 sub_commands = [
