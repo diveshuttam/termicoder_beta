@@ -1,6 +1,8 @@
 import click
 from . import autocomplete
 from . import init
+from . import man
+from . import edit
 
 
 @click.group()
@@ -20,6 +22,14 @@ sub_commands = [
     {
         "cmd": init.main,
         "name": "init"
+    },
+    {
+        "cmd": man.main,
+        "name": "man"
+    },
+    {
+        "cmd": edit.main,
+        "name": "edit"
     }
 ]
 
