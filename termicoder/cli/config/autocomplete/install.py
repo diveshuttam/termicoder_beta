@@ -1,5 +1,6 @@
 import click
 from . import click_completion
+from ....utils.logging import logger
 
 
 @click.command()
@@ -21,4 +22,4 @@ def main(append, case_insensitive, shell, path):
         extra_env = {}
     shell, path = click_completion.core.install(
         shell=shell, path=path, append=append, extra_env=extra_env)
-    click.echo('%s completion installed in %s' % (shell, path))
+    logger.info('%s completion installed in %s' % (shell, path))

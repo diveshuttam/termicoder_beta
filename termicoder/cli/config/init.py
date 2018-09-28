@@ -2,6 +2,7 @@ import click
 import os
 import termicoder.data.config as config_data
 import shutil
+from ...utils.logging import logger
 
 
 @click.command()
@@ -11,7 +12,7 @@ def main():
     """
 
     config_path = click.get_app_dir('termicoder')
-    click.echo("Setting up configuration at '{config_dest}'".format(
+    logger.info("Setting up configuration at '{config_dest}'".format(
         config_dest=config_path))
 
     if(os.path.exists(config_path)):

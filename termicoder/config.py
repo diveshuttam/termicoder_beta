@@ -5,7 +5,7 @@ try:
     from yaml import CLoader as Loader, CDumper as Dumper
 except ImportError:
     from yaml import Loader, Dumper
-
+from .utils.logging import logger
 
 # TODO handle exceptions and messages in a better way
 # TODO `load` and `safe_load` properly.
@@ -15,7 +15,7 @@ except ImportError:
 # file_path is relative to the config_path
 # currently safe=True is not supported yet
 # key = None return the whole config
-def get_config(file_path, key=None, safe=False):
+def read(file_path, key=None, safe=False):
     if(safe is True):
         # use safe load later
         pass
@@ -32,7 +32,8 @@ def get_config(file_path, key=None, safe=False):
 
     try:
         data = yaml.load(data_file, Loader=Loader)
-        print(data)
+        logger.debug("read data from file %s" % data_path)
+        logger.debug(data)
         if key is None:
             value = data
         else:
@@ -43,9 +44,9 @@ def get_config(file_path, key=None, safe=False):
 
 
 # if key is none, rewrite the whole file with value
-def write_config(file_path, key, value):
+def write(file_path, key, value):
     config_path = click.get_app_dir("termicoder")
-    existing_data = get_config(file_path, None)
+    existing_data = read(file_path, None)
     if existing_data is None:
         existing_data = {}
 
@@ -54,8 +55,11 @@ def write_config(file_path, key, value):
     else:
         existing_data = value
 
-    data_file = click.open_file(os.path.join(config_path, file_path), 'w')
+    data_path = os.path.join(config_path, file_path)
+    data_file = click.open_file(data_path, 'w')
     try:
+        logger.debug("writing data to file %s" % data_path)
+        logger.debug(existing_data)
         yaml.dump(data=existing_data, stream=data_file, Dumper=Dumper)
     except yaml.YAMLError:
         pass
@@ -63,4 +67,4 @@ def write_config(file_path, key, value):
 
 # just for testing purposes
 if __name__ == "__main__":
-    write_config('settings.yml', 'browser', None)
+    write('settings.yml', 'browser', None)

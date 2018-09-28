@@ -43,7 +43,8 @@ setup(
         'click-repl',
         'click_completion',
         'requests_oauthlib',
-        'pyyaml'
+        'pyyaml',
+        'click-log',
     ],
     entry_points='''
         [console_scripts]

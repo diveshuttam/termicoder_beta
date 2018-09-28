@@ -1,4 +1,5 @@
 import click
+from ..utils.logging import logger
 
 
 @click.command()
@@ -9,7 +10,7 @@ def main():
     launch debugger for the particular language
     and visualize the output
     '''
-    click.echo(
+    logger.info(
         'This functionality is not implemented in this version\n' +
         'The command is only kept for compatibility with future versions\n' +
         'If you want to contribute to its development visit:\n' +

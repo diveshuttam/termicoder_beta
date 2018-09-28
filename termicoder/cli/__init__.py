@@ -1,5 +1,5 @@
 import click
-
+import click_log
 from .view import main as view
 from . import code
 from . import debug
@@ -10,15 +10,15 @@ from . import repl
 from . import config
 from . import ls
 from . import clip
+from ..utils.logging import logger
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
 @click.group(context_settings=CONTEXT_SETTINGS)
-@click.option('--debug', is_flag=True, default=False,
-              help='Turn on debug messages for Termicoder.', is_eager=True)
 @click.version_option()
-def main(debug):
+@click_log.simple_verbosity_option(logger)
+def main():
     '''
     \b
     __       __                      _                __

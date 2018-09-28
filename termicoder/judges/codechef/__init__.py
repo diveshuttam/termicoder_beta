@@ -17,7 +17,8 @@ class Codechef(Judge):
         raise NotImplementedError
 
     def login(self):
-        utils.login_client()
+        token = utils.login_client()
+        self.session_data = token
 
     def logout(self):
         raise NotImplementedError

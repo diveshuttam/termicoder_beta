@@ -2,6 +2,8 @@
 from pkg_resources import iter_entry_points
 from . import Judge
 from ..utils.Errors import JudgeNotFoundError
+from .. import config
+from ..utils.logging import logger
 
 
 # Takes care of instantiating judges and keeping their session_data
@@ -60,7 +62,9 @@ class JudgeFactory:
             def decorated_function(self_, *args, **kwargs):
                 function(self_, *args, **kwargs)
                 # TODO save to the appropriate location
-                print(self_.session_data)
-                print(judge_name)
+                logger.debug("_write_session_data for %s" % judge_name)
+                logger.debug(self_.session_data)
+                config.write(
+                    'judges/sessions.yml', judge_name, self_.session_data)
             return decorated_function
         return decorator
