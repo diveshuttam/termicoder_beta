@@ -1,4 +1,7 @@
-- browser:
-  google-chrome
-- editor:
-  none
+# Value null => use default
+
+# Browser to launch a problem
+browser: null
+
+# Editor to launch a problem
+editor: null
