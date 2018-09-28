@@ -24,10 +24,12 @@ class Judge(ABC):
 
     @abstractmethod
     def login(self):
+        # login also controls all the messages being displayed to the user
         pass
 
     @abstractmethod
     def logout(self):
+        # logout also controls all the messages displayed to the user
         pass
 
     @abstractmethod

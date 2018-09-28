@@ -1,8 +1,6 @@
 import click
 from . import autocomplete
-
-
-OJs = []
+from . import init
 
 
 @click.group()
@@ -18,6 +16,10 @@ sub_commands = [
     {
         "cmd": autocomplete.main,
         "name": "autocomplete"
+    },
+    {
+        "cmd": init.main,
+        "name": "init"
     }
 ]
 

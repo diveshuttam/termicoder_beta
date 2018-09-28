@@ -1,5 +1,6 @@
 include LICENSE.txt
 include README.rst
+recursive-include config *
 recursive-include termicoder/utils/scripts *
 recursive-include termicoder/utils/templates *
 include termicoder/utils/*.json

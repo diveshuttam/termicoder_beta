@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 def readme():
     try:
-        with open('README.rst') as f:
+        with open('README.md') as f:
             return f.read()
     except BaseException:
         pass
@@ -18,6 +18,7 @@ setup(
     license='MIT',
     description='CLI to view, code & submit problems directly from terminal',
     long_description=readme(),
+    long_description_content_type='text/markdown',
     keywords='competitive iarcs codechef oj',
     classifiers=[
         'Development Status :: 3 - Alpha',
@@ -40,7 +41,9 @@ setup(
         'beautifulsoup4',
         'click-default-group',
         'click-repl',
-        'click_completion'
+        'click_completion',
+        'requests_oauthlib',
+        'pyyaml'
     ],
     entry_points='''
         [console_scripts]

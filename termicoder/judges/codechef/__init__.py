@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from ...models import Judge
+from . import utils
 
 
 class Codechef(Judge):
@@ -16,7 +17,7 @@ class Codechef(Judge):
         raise NotImplementedError
 
     def login(self):
-        raise NotImplementedError
+        utils.login_client()
 
     def logout(self):
         raise NotImplementedError
