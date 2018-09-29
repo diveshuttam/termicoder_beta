@@ -49,6 +49,7 @@ def read(file_path, key=None, safe=False):
         data = yaml.load(data_file, Loader=Loader)
         logger.debug("read data from file %s" % data_path)
         logger.debug(data)
+        logger.debug(key)
         if key is None:
             value = data
         else:
@@ -56,9 +57,9 @@ def read(file_path, key=None, safe=False):
     except yaml.YAMLError as e:
         logger.error("yaml error" + str(e))
     except KeyError as e:
-        logger.error("KeyError" + str(e))
+        logger.debug("KeyError key %s does not exist" % key )
     except TypeError as e:
-        logger.error("Type Error" + str(e))
+        logger.debug("Type Error" + str(e))
 
     return value
 

@@ -17,3 +17,4 @@ ignore/
 pip-selfcheck.json
 
 venv/
+codechef_web/

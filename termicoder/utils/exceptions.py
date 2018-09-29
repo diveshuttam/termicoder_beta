@@ -9,6 +9,7 @@ def handle_exceptions(*exceptions):
     Takes exceptions and a function,
     returns function warpped with try except and debug functionality
     """
+    # TODO correct the line number
     def wrapper(function):
         def customized_function(*args, **kwargs):
             logger.debug(
@@ -17,7 +18,7 @@ def handle_exceptions(*exceptions):
                 function(*args, **kwargs)
             except (exceptions) as e:
                 DEBUG = 10
-                if(logger.level == DEBUG):
+                if(logger.level == 20):
                     raise
                 else:
                     logger.error("in module %s:function %s:line %s" % (
@@ -26,5 +27,6 @@ def handle_exceptions(*exceptions):
                     logger.error("%s %s" % (e.__class__.__name__, e))
                     raise click.Abort
         customized_function.__wrapped__ = True
+        customized_function.__doc__ = function.__doc__
         return customized_function
     return wrapper

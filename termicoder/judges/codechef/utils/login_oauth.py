@@ -1,10 +1,9 @@
 import click
-from requests_oauthlib import OAuth2
 import json
 from ....utils.logging import logger
 
 
-def login_client():
+def login_oauth():
     home_page = 'http://termicoder.diveshuttam.me/'
     logger.info(
         "Browser window will launch, authorize termicoder with CodeChef.\n"
@@ -25,5 +24,4 @@ def login_client():
             break
     return json.loads('\n'.join(strings))
 
-    # TODO do everything with oauth2
-    OAuth2()
+    # TODO do everything with request-oauthlib
