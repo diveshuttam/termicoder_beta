@@ -5,12 +5,15 @@ from . import contest
 from . import problem
 from . import this
 from . import running
+from ...utils.logging import logger
+from ...utils.exceptions import handle_exceptions
 
 
 # view command has various subcommands
 # default is termicoder view this
 # TODO change default_if_no_args to true
 @click.group(cls=DefaultGroup, default='this', default_if_no_args=False)
+@handle_exceptions(BaseException)
 def main():
     '''
     View contests and problems.

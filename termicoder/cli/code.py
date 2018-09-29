@@ -1,11 +1,12 @@
 import click
-
+from ..utils.exceptions import handle_exceptions
 
 @click.command()
 @click.argument('FILE', 'code_file',
               type=click.Path(writable=True, readable=False, dir_okay=False),
               required=False)
 @click.option('--editor', type=click.STRING, help="Specify the editor to launch the file with.")
+@handle_exceptions(BaseException)
 def main(code_file, editor):
     '''
     Creates and opens FILE with template code.

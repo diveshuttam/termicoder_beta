@@ -2,7 +2,8 @@ import click
 import os
 from click_repl import repl
 from prompt_toolkit.history import FileHistory
-
+from ..utils.logging import logger
+from ..utils.exceptions import handle_exceptions
 
 @click.command()
 def main():

@@ -27,9 +27,12 @@ class Codechef(Judge):
             self._update_session()
 
     def check_login(self):
-        logger.debug('checking login')
+        logger.debug("Checking Login")
+        if(self.session is None):
+            logger.debug("No session object initialized")
+            return False
         me_url = self._make_url('/users/me')
-        self._request_api(me_url)
+        r = self._request_api(me_url)
 
     def login(self):
         token = utils.login_client()
@@ -50,7 +53,7 @@ class Codechef(Judge):
         # TODO: use map style.headers instead of str
         # requires change with beautifultable. we may try dev version
         table.column_headers = list(
-            map(str, ['code', 'name', 'endDate', 'startDate']))
+            map(str, ['code', 'name', 'end', 'start']))
         for contest in contests:
             table.append_row(
                 [
@@ -76,6 +79,16 @@ class Codechef(Judge):
 
     def _update_session(self):
         self.session = requests.Session()
+
+        def debug_url(r, *args, **kwargs):
+            logger.debug('Getting url %s' % r.url)
+
+        def debug_data(r, *args, **kwargs):
+            response = json.dumps(r.json(), indent=1)
+            logger.debug('Response %s' % response)
+
+        self.session.hooks['response'].append(debug_url)
+        self.session.hooks['response'].append(debug_data)
         logger.debug('Token: ' + self.session_data['data']['access_token'])
         OAuth2_Header = {
             'Authorization': 'Bearer ' +
@@ -89,10 +102,9 @@ class Codechef(Judge):
         return "/".join([api_url, rel_url])
 
     def _request_api(self, url):
-        logger.debug('Getting url %s' % url)
-        r = self.session.get(url)
-        logger.debug('Data got back from the request:')
-        logger.debug(json.dumps(r.json(), indent=2))
+        with self.session as s:
+            r = s.get(url)
+            r.raise_for_status
         return r.json()
 
     def _refresh_token(self):

@@ -1,6 +1,8 @@
 import click
 from ...models import JudgeFactory
 from ...utils.constants import default_judge
+from ...utils.logging import logger
+from ...utils.exceptions import handle_exceptions
 
 judge_factory = JudgeFactory()
 OJs = judge_factory.available_judges
@@ -10,6 +12,7 @@ OJs = judge_factory.available_judges
 @click.option('-j', '--judge', type=click.Choice(OJs),
               prompt="Please provide a judge("+'|'.join(OJs)+")",
               default=default_judge)
+@handle_exceptions(BaseException)
 def main(judge):
     '''
     View a particular contest.

@@ -1,8 +1,10 @@
 import click
 from ..utils.logging import logger
+from ..utils.exceptions import handle_exceptions
 
 
 @click.command()
+@handle_exceptions(BaseException)
 def main():
     '''
     Launches custom debug interface.

@@ -12,13 +12,17 @@ from . import ls
 from . import clip
 from ..utils.logging import logger
 from ..config import check_config_path
+from ..utils.exceptions import handle_exceptions
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
 
+# TODO correct handle_exceptions using modifying ctx.invoke
+# and use single exception
 @click.group(context_settings=CONTEXT_SETTINGS)
 @click.version_option()
 @click_log.simple_verbosity_option(logger, envvar='TERMICODER_VERBOSITY')
+@handle_exceptions(BaseException)
 def main():
     '''
     \b

@@ -1,5 +1,6 @@
 import click
-
+from ..utils.logging import logger
+from ..utils.exceptions import handle_exceptions
 
 @click.command()
 @click.option('-f', '--file', 'code_file', type=click.File(),

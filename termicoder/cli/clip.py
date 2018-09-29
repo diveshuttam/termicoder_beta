@@ -1,12 +1,14 @@
 import click
 import pyperclip
 from ..utils.logging import logger
+from ..utils.exceptions import handle_exceptions
 
 
 @click.command()
 @click.argument('code_file',
                 type=click.Path(writable=False, readable=True, dir_okay=False),
                 required=False)
+@handle_exceptions(BaseException)
 def main(code_file):
     '''
     Copies code from CODE_FILE to the clipboard.

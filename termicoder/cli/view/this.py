@@ -1,5 +1,6 @@
 import click
-
+from ...utils.logging import logger
+from ...utils.exceptions import handle_exceptions
 
 @click.command(short_help="View contents of current folder")
 @click.argument("DIR", type=click.Path(
@@ -7,6 +8,7 @@ import click
                 default='.')
 @click.option("-ed", "--edit_defaults", is_flag=True, default=False,
               help="edit default web browser")
+@handle_exceptions(BaseException)
 def main(dir, edit_defaults):
     '''
     display the termicoder contents in current/passed folder
