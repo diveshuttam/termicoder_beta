@@ -104,7 +104,8 @@ class Codechef(Judge):
     def _request_api(self, url):
         with self.session as s:
             r = s.get(url)
-            r.raise_for_status
+            logger.debug(r)
+            r.raise_for_status()
         return r.json()
 
     def _refresh_token(self):
