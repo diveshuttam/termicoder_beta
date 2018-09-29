@@ -5,17 +5,16 @@
 from abc import ABC, abstractmethod
 
 
-# Judge is an abstract class implemented by Judge developers
-# Judge kind of doubles up for login logout as well as a Factory
-# For the contest and problem classes for the particular judge
+# Judge is an abstract class to be subclassed and implemented
+# by Judge developers.
+
+# Judge class kind of doubles up for login-logout as well as a Factory
+# for the contest and problem classes for the particular judge
 class Judge(ABC):
     @abstractmethod
     def __init__(self, session_data=None):
         # Init should not have any network requests
         # do them in login, logout, check_running_contest
-        self.name = None
-        self.url = None
-        self.user = None
         self.session_data = session_data
 
     @abstractmethod

@@ -5,10 +5,16 @@ from ..utils.logging import logger
 @click.command()
 def main():
     '''
-    launches custom debug interface (in future)
-    where you can use testcase generator,
+    Launches custom debug interface.
+    Here you can use testcase generator,
     launch debugger for the particular language
-    and visualize the output
+    and visualize the output.
+
+    NOTE:
+    This functionality is not implemented in this version.
+    This option is only included for compatibility purposes.
+    If you want to contribute to its development visit:
+    https://termicoder.github.io/
     '''
     logger.info(
         'This functionality is not implemented in this version\n' +

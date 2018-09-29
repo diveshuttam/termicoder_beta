@@ -1,6 +1,7 @@
 import click
 from ...models import JudgeFactory
 from ...utils.setup import output_problem, output_contest
+from ...utils.constants import default_judge
 
 judge_factory = JudgeFactory()
 OJs = judge_factory.available_judges
@@ -8,14 +9,15 @@ OJs = judge_factory.available_judges
 
 @click.command()
 @click.option('-j', '--judge', 'judge_name', type=click.Choice(OJs),
-              prompt="Please provide a judge("+'|'.join(OJs)+")")
+              prompt="Please provide a judge("+'|'.join(OJs)+")",
+              default=default_judge)
 @click.option('-c', '--contest', type=click.STRING, help="contest code")
 @click.option('-p', '--problem', type=click.STRING, help="problem code")
 @click.option('--login', 'status', flag_value='login')
 @click.option('--logout', 'status', flag_value='logout')
 def main(judge_name, contest, problem, status):
     """
-    sets up problem, contests and login.
+    Sets up problem, contests and login.
 
     1. If you pass judge and --login/--logout,
     it logs you in and out of the judge

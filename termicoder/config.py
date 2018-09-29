@@ -41,12 +41,10 @@ def read(file_path, key=None, safe=False):
     data_path = os.path.join(get_config_path(), file_path)
 
     if(not os.path.exists(data_path)):
-        msg = "Could not find config file: '{data_path}'\n".format(
-            data_path=data_path) + "Run `termicoder config init` first!"
-        raise click.UsageError(msg)
+        return None
 
     data_file = click.open_file(data_path)
-
+    value = None
     try:
         data = yaml.load(data_file, Loader=Loader)
         logger.debug("read data from file %s" % data_path)
@@ -55,8 +53,13 @@ def read(file_path, key=None, safe=False):
             value = data
         else:
             value = data[key]
-    except (yaml.YAMLError, KeyError):
-        value = None
+    except yaml.YAMLError as e:
+        logger.error("yaml error" + str(e))
+    except KeyError as e:
+        logger.error("KeyError" + str(e))
+    except TypeError as e:
+        logger.error("Type Error" + str(e))
+
     return value
 
 

@@ -4,6 +4,7 @@ from . import Judge
 from ..utils.Errors import JudgeNotFoundError
 from .. import config
 from ..utils.logging import logger
+import sys
 
 
 # Takes care of instantiating judges and keeping their session_data
@@ -37,13 +38,17 @@ class JudgeFactory:
             # TODO log about 'why could not load judge'
             # also pass the exception instead of raising
             except AssertionError as e:
-                # Not a subclass
-                raise
+                logger.error("%s is not a subclass of Judge" % judge_class)
             except TypeError as e:
                 # Abstract methods are not implemented
-                raise
-            except BaseException:
-                raise
+                logger.error(
+                    "%s \ndoes not implement required "
+                    "abstract methods of class Judge" % judge_class)
+            except BaseException as e:
+                logger.error(e)
+                # think about something using click.abort without
+                # printing traceback
+                sys.exit(1)
 
         # sorting judges for statefulness
         self.available_judges.sort()
@@ -54,8 +59,8 @@ class JudgeFactory:
         else:
             # Return an instance of the judge
             # TODO load session data if available
-
-            return self._judge_classes[judge_name](session_data=None)
+            session_data = config.read('judges/sessions.yml', judge_name)
+            return self._judge_classes[judge_name](session_data=session_data)
 
     def _write_session_data(self, judge_name):
         def decorator(function):

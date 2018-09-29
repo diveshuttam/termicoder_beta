@@ -31,6 +31,7 @@ def main():
     view, code & submit problems directly from terminal.
     '''
     if(check_config_path() is False):
+        # TODO remove repetitive warning in REPL
         logger.warn(
             "Termicoder config has not been initialized\n"
             "Some features might not work\n"

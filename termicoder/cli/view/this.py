@@ -1,7 +1,7 @@
 import click
 
 
-@click.command(short_help="view contents of current folder")
+@click.command(short_help="View contents of current folder")
 @click.argument("DIR", type=click.Path(
                                exists=True, file_okay=False, dir_okay=True),
                 default='.')

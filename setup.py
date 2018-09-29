@@ -45,7 +45,8 @@ setup(
         'requests_oauthlib',
         'pyyaml',
         'click-log',
-        'pyperclip'
+        'pyperclip',
+        'beautifultable'
     ],
     entry_points='''
         [console_scripts]

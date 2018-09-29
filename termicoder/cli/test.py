@@ -11,7 +11,7 @@ import click
 @click.option('-es', "--edit_scripts", is_flag=True, default=False)
 def main(code_file, edit_scripts, timelimit, live):
     '''
-    test code against the sample testcases.
+    Test code against the sample testcases.
 
     \b
     this command (compiles and) runs passed code file.

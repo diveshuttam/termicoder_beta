@@ -4,6 +4,7 @@ from click_default_group import DefaultGroup
 from . import contest
 from . import problem
 from . import this
+from . import running
 
 
 # view command has various subcommands
@@ -12,7 +13,7 @@ from . import this
 @click.group(cls=DefaultGroup, default='this', default_if_no_args=False)
 def main():
     '''
-    view contests, problems and problem statement
+    View contests and problems.
     '''
     pass
 
@@ -29,6 +30,10 @@ sub_commands = [
     {
         "cmd": this.main,
         "name": "this"
+    },
+    {
+        "cmd": running.main,
+        "name": "running"
     }
 ]
 

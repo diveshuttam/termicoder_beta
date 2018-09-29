@@ -9,9 +9,9 @@ from ..utils.logging import logger
                 required=False)
 def main(code_file):
     '''
-    Copies code from FILE to the clipboard.
+    Copies code from CODE_FILE to the clipboard.
 
-    If FILE is not passed, a default file is suggested based
+    If CODE_FILE is not passed, a default file is suggested based
     on current directory.
 
     The suggested file is the most recently edited code file
