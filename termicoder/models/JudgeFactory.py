@@ -2,7 +2,7 @@
 from pkg_resources import iter_entry_points
 from . import Judge
 from ..utils.Errors import JudgeNotFoundError
-from .. import config
+from ..utils import config
 from ..utils.logging import logger
 import sys
 

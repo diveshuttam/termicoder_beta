@@ -38,14 +38,14 @@ class Judge(ABC):
     # This method serves both as a problem getter as well as kind of factory
     # for problem
     @abstractmethod
-    def get_problem(self, problem_name, contest_name, problem_data=None):
+    def get_problem(self, problem_code, contest_code, problem_data=None):
         # If problem data is passed, it should take precedence
         # Method should call the respective Problem.__init__ method to create a
         # problem instance and return it
         pass
 
     @abstractmethod
-    def get_contest(self, contest_name, contest_data=None):
+    def get_contest(self, contest_code, contest_data=None):
         # If contest data is passed, it should take precedence
         # Method should call the respective Problem.__init__ method to create a
         # problem instance and return it

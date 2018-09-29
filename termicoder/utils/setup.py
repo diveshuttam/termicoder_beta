@@ -1,6 +1,8 @@
 from ..models import Problem
 from ..models import Contest
 from ..models import Testcase
+from .logging import logger
+from ..utils.config import write
 
 
 def output_testcases(testcase, testcase_dir):
@@ -14,7 +16,8 @@ def output_problem(problem, problem_dir):
     # .problem(problem_data, problem_name, contest_name, judge_name)
     # output testcases
     assert isinstance(problem, Problem)
-    raise NotImplementedError
+    Problem.problem_code
+
 
 
 def output_contest(contest, contest_dir):

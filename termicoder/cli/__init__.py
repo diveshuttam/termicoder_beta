@@ -11,7 +11,7 @@ from . import config
 from . import ls
 from . import clip
 from ..utils.logging import logger
-from ..config import check_config_path
+from ..utils.config import check_config_path
 from ..utils.exceptions import handle_exceptions
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])

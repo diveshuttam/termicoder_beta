@@ -7,12 +7,12 @@ from abc import ABC, abstractmethod
 
 class Contest(ABC):
     @abstractmethod
-    def __init__(self, contest_name, problems=None, contest_data=None):
+    def __init__(self, contest_code, problems=None, data=None):
         # If contest_data, problems is passed, it should take priority
-        self.name = contest_name
+        self.code = contest_code
         self.problems = problems
-        self.contest_data = contest_data
-        if(contest_data is None):
+        self.data = data
+        if(data is None):
             self.refresh()
 
     @abstractmethod

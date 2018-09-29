@@ -5,10 +5,12 @@
 from abc import ABC, abstractmethod
 
 
-class Problem:
-    def __init__(self):
+class Problem(ABC):
+    @abstractmethod
+    def __init__(self, data):
         self.isSolved = None
         self.isAttempted = None
         self.tags = None
         self.author = None
         self.date_added = None
+        self.data = data

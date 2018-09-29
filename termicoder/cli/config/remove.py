@@ -1,6 +1,6 @@
 import click
 import shutil
-from ...config import get_config_path, check_config_path
+from ...utils.config import get_config_path, check_config_path
 from ...utils.logging import logger
 
 

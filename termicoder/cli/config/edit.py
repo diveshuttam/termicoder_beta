@@ -1,5 +1,5 @@
 import click
-from ...config import get_config_path
+from ...utils.config import get_config_path
 
 
 @click.command()

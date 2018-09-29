@@ -39,13 +39,14 @@ def main(judge_name, contest, problem, status):
         judge.login()
     elif(status == 'logout'):
         judge.logout()
+        return
 
     if(problem):
-        problem = judge.get_problem(contest, problem)
+        problem = judge.get_problem(contest_name=contest, problem_name=problem)
         problem_directory = "."
         output_problem(problem, problem_directory)
     elif(contest and not problem):
-        contest = judge.get_contest(contest)
+        contest = judge.get_contest(contest_name=contest)
         contest_directory = "."
         output_contest(contest, contest_directory)
 

@@ -3,7 +3,7 @@ import os
 import termicoder.data.config as config_data
 import shutil
 from ...utils.logging import logger
-from ...config import get_config_path
+from ...utils.config import get_config_path
 
 
 @click.command()

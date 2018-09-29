@@ -17,8 +17,7 @@ def handle_exceptions(*exceptions):
             try:
                 function(*args, **kwargs)
             except (exceptions) as e:
-                DEBUG = 10
-                if(logger.level == 20):
+                if(logger.level == 10):
                     raise
                 else:
                     logger.error("in module %s:function %s:line %s" % (

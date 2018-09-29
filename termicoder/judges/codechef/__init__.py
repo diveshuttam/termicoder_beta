@@ -9,8 +9,8 @@ import requests
 import json
 from .utils import get_data, login_oauth
 from beautifultable import BeautifulTable
-
-ALLOW_WEB = False
+from ...utils.Errors import AuthenticationError
+from .models import Problem
 
 
 class Codechef(Judge):
@@ -31,15 +31,19 @@ class Codechef(Judge):
         if(self.session is None):
             logger.debug("No session object initialized")
             return False
-        path = 'users/me'
-        me_url = self._make_url(path)
-        r = self._request_api(me_url)
+        me_url = self._make_url('users/me')
+        try:
+            r = self._request_api(me_url)
+            logger.debug(r)
+            return True
+        except requests.RequestException:
+            return False
 
     def login(self):
         token = login_oauth()
         self.session_data = token
         self._update_session()
-        self.check_login()
+        assert(self.check_login())
 
     def logout(self):
         logger.warning("Logout of CodeChef.")
@@ -53,6 +57,7 @@ class Codechef(Judge):
         table.width_exceed_policy = BeautifulTable.WEP_WRAP
         # TODO: use map style.headers instead of str
         # requires change with beautifultable. we may try dev version
+        # TODO: sort running and upcoming
         table.column_headers = list(
             map(str, ['code', 'name', 'end', 'start']))
         for contest in contests:
@@ -70,7 +75,16 @@ class Codechef(Judge):
         # If problem data is passed, it should take precedence
         # Method should call the respective Problem.__init__ method to create a
         # problem instance and return it
-        raise NotImplementedError
+        if(problem_data is not None):
+            return Problem(problem_data=problem_data)
+        if(problem_name is not None):
+            if(contest_name is None):
+                contest_name = 'PRACTICE'
+            problem_url = self._make_url(
+                'contests', contest_name, 'problems', problem_name)
+            problem_data = self._request_api(problem_url)
+            return Problem(problem_data=problem_data)
+
 
     def get_contest(self, contest_name, contest_data=None):
         # If contest data is passed, it should take precedence
@@ -93,25 +107,34 @@ class Codechef(Judge):
 
         self.session.hooks['response'].append(debug_url)
         self.session.hooks['response'].append(debug_data)
-        logger.debug('Token: ' + self.session_data['data']['access_token'])
+        token = self.session_data['result']['data']['access_token']
+        logger.debug('Token: ' + token)
         OAuth2_Header = {
-            'Authorization': 'Bearer ' +
-            self.session_data['data']['access_token']
+            'Authorization': 'Bearer %s' % token
         }
         self.session.headers.update(OAuth2_Header)
 
-    def _make_url(self, rel_url):
-        rel_url = rel_url.strip('/')
+    def _make_url(self, *rel_urls):
+        logger.debug(rel_urls)
         api_url = self.api_url.strip('/')
-        return "/".join([api_url, rel_url])
+        join_urls = [api_url]
+        for rel_url in rel_urls:
+            join_urls.append(rel_url.strip('/'))
+        return "/".join(join_urls)
 
     def _request_api(self, url):
         logger.debug('fetching url %s' % url)
-        with self.session as s:
-            r = s.get(url)
-            logger.debug(r)
-            r.raise_for_status()
-        return r.json()
+        try:
+            with self.session as s:
+                r = s.get(url)
+                logger.debug(r)
+                r.raise_for_status()
+            return r.json()
+        except AttributeError:
+            raise AuthenticationError(
+                'The endpoint %s requires authorization\n'
+                'Try `termicoder setup --login -j codechef` first'
+                'and grant appropriate rights' % url)
 
     def _refresh_token(self):
         logger.debug('refreshing token')
