@@ -32,7 +32,7 @@ sub_commands = [
     },
     {
         "cmd": folder.main,
-        "name": "this"
+        "name": "folder"
     },
     {
         "cmd": running.main,

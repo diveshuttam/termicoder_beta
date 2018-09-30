@@ -14,6 +14,7 @@ class CodechefProblem(Problem):
         self.date_added = None
         self.code = None
         self.data = data
+        self.html = None
         if(data is not None):
             self._initialize()
 
@@ -22,4 +23,4 @@ class CodechefProblem(Problem):
         problem_content = namedtuple(
             "problem", concerned_data.keys())(*concerned_data.values())
         self.code = problem_content.problemCode
-
+        self.html = problem_content.body

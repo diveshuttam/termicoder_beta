@@ -3,6 +3,8 @@ from ..models import Contest
 from ..models import Testcase
 from .logging import logger
 from ..utils.yaml import write
+from builtins import FileExistsError
+import click
 import os
 
 
@@ -31,6 +33,10 @@ def output_problem(problem, problem_dir):
     except BaseException:
         raise
     write(problem_path, None, problem)
+    html_path = os.path.join(directory_path, problem.code + '.html')
+    html_file = click.open_file(html_path, 'w')
+    logger.debug('writing html for %s' % problem.code)
+    html_file.write(problem.html)
 
 
 def output_contest(contest, contest_dir):

@@ -1,6 +1,6 @@
 import click
 
-
+# TODO Use this for aliasing list with LS, DIR
 class AliasedGroup(click.Group):
     def __init__(self, aliases):
         self.aliases = aliases
