@@ -7,7 +7,7 @@
 [![Requirements Status](https://requires.io/github/termicoder/termicoder/requirements.svg?branch=master)](https://requires.io/github/termicoder/termicoder/requirements/?branch=master)
 [![Licence](https://img.shields.io/github/license/termicoder/termicoder.svg)](https://github.com/termicoder/termicoder/blob/master/LICENSE.txt)
 
-View, Code, Submit directly from terminal
+View, Code, Submit directly from terminal  
 Made with :heart: by [Divesh Uttamchandani](https://github.com/diveshuttam)
 
 ## A python based command line interface for helping in competitive programming. Termicoder aims at automating and simplifying the process of coding, testing and submitting solutions to Online Judges so that one can concentrate only on algorithms
@@ -143,9 +143,12 @@ Unlike [previous implementation](https://github.com/termicoder/termicoder) this
 completely does away with `exec` and `eval` calls. And implements `Judges`,
 `Problems` and `Contests` as classes instead of modules.
 
-There is an abstract class `Judge` which is used to dispatch operations to a particular judges through `Judge Factory`. Developers can subclass and implement
-the `Judge` class externally and attach their module to setup tool entry-point
-`termicoder.judge_plugins`. Termicoder dynamically loads these judges and dispatches the operations.
+There is an abstract class `Judge` which is used to dispatch operations to a
+particular judge instance through `Judge Factory`.
+Developers can subclass and implement the `Judge` class externally
+and attach their module to setup tool entry-point - `termicoder.judge_plugins`.
+
+Termicoder dynamically loads these judges and dispatches the operations.
 Complete documentation for writing judge-plugins and the UML design docs for termicoder would be available soon. By then you can look at the `judge/codechef`
 implementation in the repo to see an example implementation . See setup.py for
 seeing how to subscribe to entry point `termicoder.judge_plugins`.
