@@ -149,9 +149,11 @@ Developers can subclass and implement the `Judge` class externally
 and attach their module to setup tool entry-point - `termicoder.judge_plugins`.
 
 Termicoder dynamically loads these judges and dispatches the operations.
-Complete documentation for writing judge-plugins and the UML design docs for termicoder would be available soon. By then you can look at the `judge/codechef`
-implementation in the repo to see an example implementation . See setup.py for
-seeing how to subscribe to entry point `termicoder.judge_plugins`.
+Complete documentation for writing judge-plugins and the UML design docs for
+termicoder would be available soon. By then you can look at the
+`termicoder/judges/codechef` in this repo for an example implementation.
+See setup.py for example of how to subscribe to entry point
+`termicoder.judge_plugins`.
 
 This distribution currently includes judge plugin `codechef` implemented using
 [codechef api](http://developers.codechef.com/) for [codechef api hackathon powered by Alibaba](https://www.codechef.com/CAH1801)
@@ -170,6 +172,6 @@ This repo code will replace the [main termicoder repo](https://github.com/termic
 
 You can use previous implementation of termicoder by specifying the version while pip
 installation.
-Previous implementation had version numbers ~0.2.* and current implementation has
-versions ~0.3.*
-Once all primary features are implemented we will shift to beta versions (~0.9.*) for develop branch and stable versions (~1.0.*) for master branch
+Previous implementation had version numbers `~0.2.*` and current implementation has
+versions `~0.3.*`
+Once all primary features are implemented we will shift to beta versions `~0.9.*` for develop branch and stable versions `~1.0.*` for master branch
