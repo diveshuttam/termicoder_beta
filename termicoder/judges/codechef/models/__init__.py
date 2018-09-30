@@ -1,4 +1,4 @@
-from .Contest import Contest
+from .Contest import CodechefContest as Contest
 from .Problem import CodechefProblem as Problem
 from .Tags import Tags
 from .User import User

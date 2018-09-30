@@ -14,3 +14,4 @@ class Problem(ABC):
         self.author = None
         self.date_added = None
         self.data = data
+        self.code = None

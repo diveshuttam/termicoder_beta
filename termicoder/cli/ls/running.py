@@ -20,5 +20,5 @@ def main(judge_name):
 
     # TODO judge.check_login and print current status
     judge = judge_factory.get_judge(judge_name)
-    contest_url = judge.contest_url
-    click.launch(contest_url)
+    running_contests = judge.get_running_contests()
+    click.echo_via_pager(running_contests)

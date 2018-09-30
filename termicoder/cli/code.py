@@ -2,7 +2,7 @@ import click
 from ..utils.exceptions import handle_exceptions
 
 
-@click.command()
+@click.command(short_help='Creates and opens file with template code.')
 @click.argument('code_file',
                 type=click.Path(writable=True, readable=False, dir_okay=False),
                 required=False)

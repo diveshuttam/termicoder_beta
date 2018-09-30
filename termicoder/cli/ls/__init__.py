@@ -2,7 +2,6 @@ import click
 from click_default_group import DefaultGroup
 
 from . import contest
-from . import problem
 from . import folder
 from . import running
 from ...utils.logging import logger
@@ -16,7 +15,7 @@ from ...utils.exceptions import handle_exceptions
 @handle_exceptions(BaseException)
 def main():
     '''
-    View contests and problems.
+    List the contents of current folder.
     '''
     pass
 
@@ -27,12 +26,8 @@ sub_commands = [
         "name": "contest"
     },
     {
-        "cmd": problem.main,
-        "name": "problem"
-    },
-    {
         "cmd": folder.main,
-        "name": "this"
+        "name": "folder"
     },
     {
         "cmd": running.main,

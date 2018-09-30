@@ -2,6 +2,7 @@ import click
 from ...models import JudgeFactory
 from ...utils.setup import output_problem, output_contest
 from ...utils.constants import default_judge
+from ...utils.exceptions import handle_exceptions
 
 judge_factory = JudgeFactory()
 OJs = judge_factory.available_judges
@@ -15,6 +16,7 @@ OJs = judge_factory.available_judges
 @click.option('-p', '--problem', type=click.STRING, help="problem code")
 @click.option('--login', 'status', flag_value='login')
 @click.option('--logout', 'status', flag_value='logout')
+@handle_exceptions(BaseException)
 def main(judge_name, contest, problem, status):
     """
     Sets up problem, contests and login.
@@ -42,11 +44,11 @@ def main(judge_name, contest, problem, status):
         return
 
     if(problem):
-        problem = judge.get_problem(contest_name=contest, problem_name=problem)
+        problem = judge.get_problem(contest_code=contest, problem_code=problem)
         problem_directory = "."
         output_problem(problem, problem_directory)
     elif(contest and not problem):
-        contest = judge.get_contest(contest_name=contest)
+        contest = judge.get_contest(contest_code=contest)
         contest_directory = "."
         output_contest(contest, contest_directory)
 

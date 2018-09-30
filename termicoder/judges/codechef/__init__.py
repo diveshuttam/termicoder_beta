@@ -10,7 +10,7 @@ import json
 from .utils import get_data, login_oauth
 from beautifultable import BeautifulTable
 from ...utils.Errors import AuthenticationError
-from .models import Problem
+from .models import Problem, Contest
 
 
 class Codechef(Judge):
@@ -71,26 +71,36 @@ class Codechef(Judge):
 
     # This method serves both as a problem getter as well as kind of factory
     # for problem
-    def get_problem(self, problem_name, contest_name, problem_data=None):
+    def get_problem(self, problem_code, contest_code):
         # If problem data is passed, it should take precedence
         # Method should call the respective Problem.__init__ method to create a
         # problem instance and return it
-        if(problem_data is not None):
-            return Problem(problem_data=problem_data)
-        if(problem_name is not None):
-            if(contest_name is None):
-                contest_name = 'PRACTICE'
+        logger.info('fetching problem %s' % problem_code)
+        if(problem_code is not None):
+            if(contest_code is None):
+                contest_code = 'PRACTICE'
+            contest_code = contest_code.upper()
+            problem_code = problem_code.upper()
             problem_url = self._make_url(
-                'contests', contest_name, 'problems', problem_name)
+                'contests', contest_code, 'problems', problem_code)
             problem_data = self._request_api(problem_url)
-            return Problem(problem_data=problem_data)
+            return Problem(data=problem_data)
 
-
-    def get_contest(self, contest_name, contest_data=None):
+    def get_contest(self, contest_code):
         # If contest data is passed, it should take precedence
         # Method should call the respective Problem.__init__ method to create a
         # problem instance and return it
-        pass
+        logger.info('fetching contest %s' % contest_code)
+        contest_code = contest_code.upper()
+        contest_url = self._make_url('contests', contest_code)
+        contest_data = self._request_api(contest_url)
+        contest = Contest(data=contest_data)
+        logger.debug(contest.problem_codes)
+        for problem_code in contest.problem_codes:
+            contest.problems.append(
+                self.get_problem(
+                    contest_code=contest.code, problem_code=problem_code))
+        return contest
 
     def _update_session(self):
         self.session = requests.Session()

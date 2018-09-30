@@ -4,7 +4,7 @@ from ..utils.logging import logger
 from ..utils.exceptions import handle_exceptions
 
 
-@click.command()
+@click.command(short_help='Copies code from file to clipboard.')
 @click.argument('code_file',
                 type=click.Path(writable=False, readable=True, dir_okay=False),
                 required=False)
