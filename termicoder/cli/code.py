@@ -6,7 +6,9 @@ from ..utils.exceptions import handle_exceptions
 @click.argument('code_file',
                 type=click.Path(writable=True, readable=False, dir_okay=False),
                 required=False)
-@click.option('--editor', type=click.STRING, help="Specify the editor to launch the file with.")
+@click.option('--editor', type=click.STRING,
+              help="Specify the editor to launch the file with.")
+@handle_exceptions(BaseException)
 def main(code_file, editor):
     '''
     Creates and opens CODE_FILE with template code.
@@ -29,14 +31,3 @@ def main(code_file, editor):
     editor, and language preferences.
     '''
     raise NotImplementedError
-    # if(edit_templates):
-    #     code_module.edit_templates()
-
-    # elif(edit_defaults):
-    #     code_module.edit_defaults()
-
-    # elif(code_file is None):
-    #     code_file = code_module.get_file_name()
-
-    # if(code_file is not None):
-    #     code_module.code(code_file)
