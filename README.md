@@ -144,9 +144,11 @@ completely does away with `exec` and `eval` calls. And implements `Judges`,
 `Problems` and `Contests` as classes instead of modules.
 
 There is an abstract class `Judge` which is used to dispatch operations to a particular judges through `Judge Factory`. Developers can subclass and implement
-the `Judge` class externally and attach the module to setup tool entry-point
+the `Judge` class externally and attach their module to setup tool entry-point
 `termicoder.judge_plugins`. Termicoder dynamically loads these judges and dispatches the operations.
-Complete documentation for writing judge-plugins and the UML design docs for termicoder would be available soon.
+Complete documentation for writing judge-plugins and the UML design docs for termicoder would be available soon. By then you can look at the `judge/codechef`
+implementation in the repo to see an example implementation . See setup.py for
+seeing how to subscribe to entry point `termicoder.judge_plugins`.
 
 This distribution currently includes judge plugin `codechef` implemented using
 [codechef api](http://developers.codechef.com/) for [codechef api hackathon powered by Alibaba](https://www.codechef.com/CAH1801)
