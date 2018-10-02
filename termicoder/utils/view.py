@@ -1,8 +1,7 @@
 from .logging import logger
-import click
 import os
 from . import yaml
-import subprocess
+from . import launch
 
 
 def folder(directory, browser):
@@ -23,9 +22,4 @@ def folder(directory, browser):
         logger.error("Please make sure you are in correct directory")
         return
 
-    if browser is None:
-        logger.warn('preferred browser not set, launching in default browser')
-        click.launch(url)
-    else:
-        logger.info('Launching problem with %s' % browser)
-        subprocess.call([browser, url])
+    launch(browser, url)

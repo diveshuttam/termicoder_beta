@@ -15,8 +15,6 @@ from .models import Problem, Contest
 
 class Codechef(Judge):
     def __init__(self, session_data=None):
-        # Init should not have any network requests
-        # do them in login, logout, check_running_contest
         logger.debug("Initializing class Codechef with session_data:\n%s"
                      % session_data)
         self.name = "Codechef"
@@ -31,7 +29,7 @@ class Codechef(Judge):
         if(self.session is None):
             logger.debug("No session object initialized")
             return False
-        me_url = self._make_url('users/me')
+        me_url = self._make_url(self.api_url, 'users/me')
         try:
             r = self._request_api(me_url)
             logger.debug(r)
@@ -69,12 +67,7 @@ class Codechef(Judge):
             )
         return table
 
-    # This method serves both as a problem getter as well as kind of factory
-    # for problem
     def get_problem(self, problem_code, contest_code):
-        # If problem data is passed, it should take precedence
-        # Method should call the respective Problem.__init__ method to create a
-        # problem instance and return it
         logger.info('fetching problem %s' % problem_code)
         if(problem_code is not None):
             if(contest_code is None):
@@ -82,17 +75,14 @@ class Codechef(Judge):
             contest_code = contest_code.upper()
             problem_code = problem_code.upper()
             problem_url = self._make_url(
-                'contests', contest_code, 'problems', problem_code)
+                self.api_url, 'contests', contest_code, 'problems', problem_code)
             problem_data = self._request_api(problem_url)
             return Problem(data=problem_data)
 
     def get_contest(self, contest_code):
-        # If contest data is passed, it should take precedence
-        # Method should call the respective Problem.__init__ method to create a
-        # problem instance and return it
         logger.info('fetching contest %s' % contest_code)
         contest_code = contest_code.upper()
-        contest_url = self._make_url('contests', contest_code)
+        contest_url = self._make_url(self.api_url, 'contests', contest_code)
         contest_data = self._request_api(contest_url)
         contest = Contest(data=contest_data)
         logger.debug(contest.problem_codes)
@@ -101,6 +91,24 @@ class Codechef(Judge):
                 self.get_problem(
                     contest_code=contest.code, problem_code=problem_code))
         return contest
+
+    def get_problem_url(self, problem_code, contest_code):
+        if (contest_code is None):
+            contest_code = 'PRACTICE'
+        contest_code = contest_code.upper()
+        problem_code = problem_code.upper()
+        if(contest_code == 'PRACTICE'):
+            return self._make_url(self.url, 'problems', problem_code)
+        return self._make_url(self.url, contest_code,
+                              'problems', problem_code)
+
+    def get_contest_url(self, contest_code):
+        if (contest_code is None):
+            contest_code = 'PRACTICE'
+        contest_code = contest_code.upper()
+        if(contest_code == 'PRACTICE'):
+            return self._make_url(self.url, 'problems', 'school')
+        return self._make_url(self.url, contest_code)
 
     def _update_session(self):
         self.session = requests.Session()
@@ -124,10 +132,11 @@ class Codechef(Judge):
         }
         self.session.headers.update(OAuth2_Header)
 
-    def _make_url(self, *rel_urls):
+    def _make_url(self, base_url, *rel_urls):
+        logger.debug(base_url)
         logger.debug(rel_urls)
-        api_url = self.api_url.strip('/')
-        join_urls = [api_url]
+        base_url = base_url.strip('/')
+        join_urls = [base_url]
         for rel_url in rel_urls:
             join_urls.append(rel_url.strip('/'))
         return "/".join(join_urls)

@@ -38,15 +38,23 @@ class Judge(ABC):
     # This method serves both as a problem getter as well as kind of factory
     # for problem
     @abstractmethod
-    def get_problem(self, problem_code, contest_code, problem_data=None):
-        # If problem data is passed, it should take precedence
+    def get_problem(self, problem_code, contest_code):
         # Method should call the respective Problem.__init__ method to create a
         # problem instance and return it
         pass
 
     @abstractmethod
-    def get_contest(self, contest_code, contest_data=None):
-        # If contest data is passed, it should take precedence
+    def get_contest(self, contest_code):
         # Method should call the respective Problem.__init__ method to create a
-        # problem instance and return it
+        # contest instance with all its problems and return it
+        pass
+
+    @abstractmethod
+    def get_problem_url(self, problem_code, contest_code):
+        # Method should return the url used by judge for a particular problem
+        pass
+
+    @abstractmethod
+    def get_contest_url(self, contest_code):
+        # Method should return the url used by judge for a particular contest
         pass

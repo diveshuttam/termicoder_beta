@@ -13,7 +13,7 @@ def transpose_running_oauth(x):
 
 def running_contests(self):
     path = 'contests'
-    url = self._make_url(path)
+    url = self._make_url(self.api_url, path)
     r = self._request_api(url)
 
     data = r['result']['data']['content']
