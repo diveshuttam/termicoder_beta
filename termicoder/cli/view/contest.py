@@ -16,13 +16,14 @@ OJs = judge_factory.available_judges
               default=default_judge)
 @click.option("--browser", help='Browser to launch', type=click.STRING,
               default=config.read('settings.yml', 'browser'))
-@click.argument('contest')
+@click.argument('CONTEST_CODE', required=False)
 @handle_exceptions(BaseException)
-def main(judge_name, contest, browser):
+def main(judge_name, contest_code, browser):
     '''
-    View a particular problem from the judge.
+    View a contest from the judge.
+    Launches the contest in browser
     '''
     judge = judge_factory.get_judge(judge_name)
-    contest_url = judge.get_contest_url(contest_code=contest)
+    contest_url = judge.get_contest_url(contest_code=contest_code)
     logger.debug('launching %s' % contest_url)
     launch(browser, contest_url)

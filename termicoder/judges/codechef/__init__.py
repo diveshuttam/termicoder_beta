@@ -110,6 +110,9 @@ class Codechef(Judge):
             return self._make_url(self.url, 'problems', 'school')
         return self._make_url(self.url, contest_code)
 
+    def get_contests_list_url(self):
+        return self._make_url(self.url, 'contests')
+
     def _update_session(self):
         self.session = requests.Session()
 

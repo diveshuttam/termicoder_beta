@@ -33,6 +33,7 @@ class Judge(ABC):
 
     @abstractmethod
     def get_running_contests(self):
+        # return a string of running contest, do it in form of a table.
         pass
 
     # This method serves both as a problem getter as well as kind of factory
@@ -57,4 +58,9 @@ class Judge(ABC):
     @abstractmethod
     def get_contest_url(self, contest_code):
         # Method should return the url used by judge for a particular contest
+        pass
+
+    @abstractmethod
+    def get_contests_list_url(self):
+        # Method should return the url used by judge for listing contest
         pass
