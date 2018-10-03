@@ -109,10 +109,10 @@ class Codechef(Judge):
 
     def submit(self, problem, code_text, extension):
         # TODO : correct this
-        logger.error("Codechef api doesn't support the submissions yet.\n"
-                     "Please contact them to support this.\n"
-                     "You can also try codechef-web implementation.\n"
-                     "https://github.com/termicoder/termicoder-codechef-web\n"
+        logger.warn("Codechef api doesn't support the submissions yet.\n"
+                    "Please contact them to support this.\n"
+                    "You can also try codechef-web implementation.\n"
+                    "https://github.com/termicoder/termicoder-codechef-web\n"
         )
         import pyperclip
         pyperclip.copy(code_text)
@@ -122,10 +122,10 @@ class Codechef(Judge):
         else:
             url = self._make_url(
                 self.url, 'submit', problem.code)
-        logger.error("By the time,"
-                     "We have copied the code to clipboard "
-                     "and are launching the submit url\n%s\n"
-                     "Please paste your code there and submit" % url)
+        logger.warn("By the time,"
+                    "We have copied the code to clipboard "
+                    "and are launching the submit url\n%s\n"
+                    "Please paste your code there and submit" % url)
         click.confirm("Continue?", default=True)
         click.launch(url)
 

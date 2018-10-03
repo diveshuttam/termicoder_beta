@@ -15,4 +15,4 @@ def launch(app_args, url):
         logger.info('Launching %s with %s' % (url, ' '.join(args)))
         args.append(url)
         logger.debug(args)
-        subprocess.call(args)
+        subprocess.run(args)
