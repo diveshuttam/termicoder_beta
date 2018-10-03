@@ -60,7 +60,6 @@ def _extract_io(pre_tag_elements):
             sibling = sample_io.parent.previous_sibling
             while(not str(sibling).strip()):
                 sibling = sibling.previous_sibling
-                logger.warn(sibling)
         iotext = str(sample_io.text)
 
         # standard codechef problems with input and output in same pre tag

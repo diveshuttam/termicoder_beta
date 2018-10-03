@@ -7,7 +7,7 @@ from ...utils import config
 @click.command(short_help="View contents of folder.")
 @click.argument("dir_name", type=click.Path(
                     exists=True, file_okay=False, dir_okay=True), default='.')
-@click.option("--browser", help='Browser to launch', type=click.STRING,
+@click.option("--browser", help='Browser to launch',
               default=config.read('settings.yml', 'browser'))
 @handle_exceptions(BaseException)
 def main(dir_name, browser):

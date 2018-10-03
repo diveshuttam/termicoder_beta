@@ -13,7 +13,7 @@ OJs = judge_factory.available_judges
 @click.option('-j', '--judge', 'judge_name', type=click.Choice(OJs),
               prompt="Please provide a judge ("+'|'.join(OJs)+")",
               default=default_judge, show_default=True)
-@click.option("--browser", help='Browser to launch', type=click.STRING,
+@click.option("--browser", help='Browser to launch',
               default=config.read('settings.yml', 'browser'))
 @handle_exceptions(BaseException)
 def main(judge_name, browser):

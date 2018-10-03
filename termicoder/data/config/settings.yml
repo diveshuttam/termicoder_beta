@@ -5,3 +5,19 @@ browser: null
 
 # Editor to launch a problem
 editor: null
+
+# # Jinja style arguement substitutions are supproted while launching code_file
+# # in editor.
+# # example
+# editor:
+#   - vim
+#   - +{{row_no}}
+# # assuming row_no is defined with each of the templates
+# # you can define variable on your own in code templates and use here
+
+
+# Default file name extension for code
+default_extension: cpp
+
+# Default file name for non problem directories
+default_code_file: a.cpp

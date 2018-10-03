@@ -16,7 +16,7 @@ OJs = judge_factory.available_judges
               prompt="Please provide a judge("+'|'.join(OJs)+")",
               default=default_judge)
 @click.option('-c', '--contest', type=click.STRING, help="contest code")
-@click.option("--browser", help='Browser to launch', type=click.STRING,
+@click.option("--browser", help='Browser to launch',
               default=config.read('settings.yml', 'browser'))
 @click.argument('PROBLEM_CODE')
 @handle_exceptions(BaseException)
