@@ -2,11 +2,13 @@ import click
 import pyperclip
 from ..utils.logging import logger
 from ..utils.exceptions import handle_exceptions
+from ..utils.load import get_default_code_name
+import os
 
 
 @click.command(short_help='Copies code from file to clipboard.')
 @click.argument('code_file',
-                type=click.Path(writable=False, readable=True, dir_okay=False),
+                type=click.Path(exists=True, dir_okay=False),
                 required=False)
 @handle_exceptions(BaseException)
 def main(code_file):
@@ -20,6 +22,13 @@ def main(code_file):
     recognized by termicoder.
     '''
     if(code_file is None):
-        return
+        default_file = get_default_code_name()
+        if (not os.path.exists(default_file)):
+            default_file = None
+        code_file = click.prompt(
+            "Please enter the file to copy",
+            default=default_file,
+            type=click.Path(readable=True, exists=True)
+        )
     pyperclip.copy(open(code_file, 'r').read())
     logger.info("copied %s to clipboard" % code_file)

@@ -1,7 +1,6 @@
 import click
 from ..utils.exceptions import handle_exceptions
 from ..utils import config
-from ..utils import yaml
 from ..utils.logging import logger
 from ..utils.launch import launch
 from ..utils.load import get_default_code_name
@@ -10,7 +9,7 @@ import os
 
 @click.command(short_help='Creates and opens file with template code.')
 @click.argument('code_file',
-                type=click.Path(writable=True, readable=False, dir_okay=False),
+                type=click.Path(writable=True, dir_okay=False),
                 required=False)
 @click.option('--editor',
               help="Specify the editor to launch the file with.",
@@ -42,7 +41,8 @@ def main(code_file, editor):
     if code_file is None:
         default_name = get_default_code_name()
         code_file = click.prompt(
-            "Please enter a file name", default=default_name)
+            "Please enter a file name", default=default_name,
+            type=click.Path(writable=True, dir_okay=False))
 
     extension = code_file.split('.')[-1]
     template = config.read('code/templates/%s/template.yml' % extension)
