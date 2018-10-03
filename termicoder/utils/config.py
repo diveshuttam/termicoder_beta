@@ -1,5 +1,6 @@
 import click
 import os
+from builtins import FileNotFoundError
 from .import yaml as localYAML
 from .logging import logger
 
@@ -43,7 +44,7 @@ def read(rel_path, key=None, safe=False):
 def write(rel_path, key, value):
     data_path = os.path.join(get_config_path(), rel_path)
     if(os.path.exists(data_path) is False):
-        raise os.FileNotFoundError
+        raise FileNotFoundError
     value = localYAML.write(data_path, key, value)
 
 

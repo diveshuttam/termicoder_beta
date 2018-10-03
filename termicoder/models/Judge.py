@@ -72,3 +72,9 @@ class Judge(ABC):
         # extension is the extension of the code file to determine
         # language of submission
         pass
+
+    @abstractmethod
+    def get_testcase(self, inp, ans, code):
+        # returns the testcase with inp, ans and code
+        # used by termicoder test to output diff
+        pass

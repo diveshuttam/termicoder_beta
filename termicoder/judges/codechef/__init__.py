@@ -10,7 +10,7 @@ import json
 from .utils import get_data, login_oauth
 from beautifultable import BeautifulTable
 from ...utils.Errors import AuthenticationError
-from .models import Problem, Contest
+from .models import Problem, Contest, Testcase
 from ...utils import style
 
 
@@ -161,6 +161,9 @@ class Codechef(Judge):
             'Authorization': 'Bearer %s' % token
         }
         self.session.headers.update(OAuth2_Header)
+
+    def get_testcase(self, inp, ans, code):
+        return Testcase(inp=inp, ans=ans, code=code)
 
     def _make_url(self, base_url, *rel_urls):
         logger.debug(base_url)

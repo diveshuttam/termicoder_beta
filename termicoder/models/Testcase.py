@@ -3,7 +3,7 @@
 
 # ABC is the AbstractBaseClass in python
 from abc import ABC, abstractmethod
-import difflib
+from ..utils import icdiff
 
 
 class Testcase(ABC):
@@ -16,4 +16,12 @@ class Testcase(ABC):
     # judges can override this if they want
     # this is used to produce diff on termicoder test
     def diff(self, out):
-        return difflib.diff(self.ans, self.out)
+        ans_file_name = self.code + ".ans"
+        out_file_name = self.code + ".out"
+        ans_list = [x+'\n' for x in self.ans.split('\n')]
+        out_list = [x+'\n' for x in out.split('\n')]
+        diffobj = icdiff.ConsoleDiff(line_numbers=True, show_all_spaces=True)
+
+        return '\n'.join(diffobj.make_table(
+                            out_list, ans_list, fromdesc=out_file_name,
+                            todesc=ans_file_name, context=False, numlines=10))

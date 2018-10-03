@@ -32,4 +32,4 @@ build:
 # # Time limits etc.
 # # is handled by termicoder internally
 run:
-  - "{{BUILD_NAME}}"
+  - "./{{BUILD_NAME}}"
