@@ -17,6 +17,7 @@ class CodechefProblem(Problem):
         self.data = data
         self.html = None
         self.testcases = None
+        self.judge_name = "codechef"
         if(data is not None):
             self._initialize()
 

@@ -1,10 +1,18 @@
 import click
 from ..utils.logging import logger
 from ..utils.exceptions import handle_exceptions
+from ..models import JudgeFactory
+from ..utils import yaml
+from ..utils.load import get_default_code_name
+import os
+
+judge_factory = JudgeFactory()
+
 
 @click.command()
-@click.option('-f', '--file', 'code_file', type=click.File(),
-              help="the code file")
+@click.argument('code_file', type=click.Path(exists=True, dir_okay=False),
+                required=False)
+@handle_exceptions(BaseException)
 def main(code_file):
     '''
     Submit a solution.
@@ -13,11 +21,22 @@ def main(code_file):
 
     \b
     Script will prompt you to login into the judge(if not already).
-    This submits the problem using data in [.problem] file in current directory
     '''
-    raise NotImplementedError
-    # judge = parse.get_judge()
-    # if(not code_file):
-    #     code_file = parse.get_code_file()
-    # code_file = parse.get_file_name(code_file)
-    # eval(judge).submit(code_file)
+    if '.problem.yml' not in os.listdir():
+        logger.error("You should be in a problem directory to submit")
+        return
+
+    if(code_file is None):
+        default_file = get_default_code_name()
+        if (not os.path.exists(default_file)):
+            default_file = None
+        code_file = click.prompt(
+            "Please a code file to submit",
+            default=default_file,
+            type=click.Path(readable=True, exists=True)
+        )
+
+    code = click.open_file(code_file).read()
+    problem = yaml.read('.problem.yml')
+    judge = judge_factory.get_judge(problem.judge_name)
+    judge.submit(problem, code)

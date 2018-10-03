@@ -18,7 +18,7 @@ class Codechef(Judge):
     def __init__(self, session_data=None):
         logger.debug("Initializing class Codechef with session_data:\n%s"
                      % session_data)
-        self.name = "Codechef"
+        self.name = "codechef"
         self.url = "https://www.codechef.com"
         self.api_url = "https://api.codechef.com"
         self.session_data = session_data
@@ -78,7 +78,10 @@ class Codechef(Judge):
             problem_url = self._make_url(
                 self.api_url, 'contests', contest_code, 'problems', problem_code)
             problem_data = self._request_api(problem_url)
-            return Problem(data=problem_data)
+            problem = Problem(data=problem_data)
+            problem.judge_name = self.name
+            problem.contest_code = contest_code
+            return problem
 
     def get_contest(self, contest_code):
         logger.info('fetching contest %s' % contest_code)
@@ -91,6 +94,7 @@ class Codechef(Judge):
             contest.problems.append(
                 self.get_problem(
                     contest_code=contest.code, problem_code=problem_code))
+        contest.judge_name = self.name
         return contest
 
     def get_problem_url(self, problem_code, contest_code):
@@ -102,6 +106,28 @@ class Codechef(Judge):
             return self._make_url(self.url, 'problems', problem_code)
         return self._make_url(self.url, contest_code,
                               'problems', problem_code)
+
+    def submit(self, problem, code_text):
+        # TODO : correct this
+        logger.error("Codechef api doesn't support the submissions yet.\n"
+                     "Please contact them to support this.\n"
+                     "You can also try codechef-web implementation.\n"
+                     "https://github.com/termicoder/termicoder-codechef-web\n"
+        )
+        import pyperclip
+        pyperclip.copy(code_text)
+        if(problem.contest_code != 'PRACTICE'):
+            url = self._make_url(
+                self.url, problem.contest_code, 'submit', problem.code)
+        else:
+            url = self._make_url(
+                self.url, 'submit', problem.code)
+        logger.error("By the time,"
+                     "We have copied the code to clipboard "
+                     "and are launching the submit url\n%s\n"
+                     "Please paste your code there and submit" % url)
+        click.confirm("Continue?", default=True)
+        click.launch(url)
 
     def get_contest_url(self, contest_code):
         if (contest_code is None):

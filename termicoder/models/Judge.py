@@ -64,3 +64,9 @@ class Judge(ABC):
     def get_contests_list_url(self):
         # Method should return the url used by judge for listing contest
         pass
+
+    @abstractmethod
+    def submit(self, problem, code_text):
+        # problem is an instance of judge's problem class
+        # code test is the code to be submitted
+        pass
