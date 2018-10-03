@@ -47,7 +47,8 @@ setup(
         'pyyaml',
         'click-log',
         'pyperclip',
-        'beautifultable'
+        'beautifultable',
+        'Markdown',
     ],
     entry_points='''
         [console_scripts]

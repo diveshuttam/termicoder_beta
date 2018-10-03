@@ -11,6 +11,7 @@ from .utils import get_data, login_oauth
 from beautifultable import BeautifulTable
 from ...utils.Errors import AuthenticationError
 from .models import Problem, Contest
+from ...utils import style
 
 
 class Codechef(Judge):
@@ -57,7 +58,7 @@ class Codechef(Judge):
         # requires change with beautifultable. we may try dev version
         # TODO: sort running and upcoming
         table.column_headers = list(
-            map(str, ['code', 'name', 'end', 'start']))
+            map(style.header, ['code', 'name', 'end', 'start']))
         for contest in contests:
             table.append_row(
                 [

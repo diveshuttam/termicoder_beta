@@ -1,7 +1,7 @@
 from .logging import logger
 import os
 from . import yaml
-from . import launch
+from .launch import launch
 
 
 def folder(directory, browser):

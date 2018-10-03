@@ -8,10 +8,29 @@ import click
 import os
 
 
-def output_testcases(testcase, testcase_dir):
-    # TODO output testcases
-    assert isinstance(testcase, Testcase)
-    raise NotImplementedError
+def output_testcase(testcase, testcase_dir):
+    try:
+        assert isinstance(testcase, Testcase)
+        directory_path = testcase_dir
+        inp_path = os.path.join(
+            directory_path, '%s.in' % testcase.code)
+        ans_path = os.path.join(
+            directory_path, '%s.ans' % testcase.code)
+        logger.debug(inp_path)
+        logger.debug(ans_path)
+        os.makedirs(directory_path)
+    except FileExistsError:
+        pass
+    except AssertionError:
+        logger.debug(type(testcase))
+        raise
+    except BaseException:
+        raise
+    inp_file = click.open_file(inp_path, 'w')
+    ans_file = click.open_file(ans_path, 'w')
+    logger.debug('writing testcase %s for problem' % (testcase.code))
+    inp_file.write(testcase.inp)
+    ans_file.write(testcase.ans)
 
 
 # judge_name is required for instantiating it back from file
@@ -37,6 +56,9 @@ def output_problem(problem, problem_dir):
     html_file = click.open_file(html_path, 'w')
     logger.debug('writing html for %s' % problem.code)
     html_file.write(problem.html)
+    testcase_path = os.path.join(directory_path, 'testcases')
+    for testcase in problem.testcases:
+        output_testcase(testcase, testcase_path)
 
 
 def output_contest(contest, contest_dir):

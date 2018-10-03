@@ -11,3 +11,5 @@ requests_oauthlib
 click-default-group
 click-repl
 click_completion
+Markdown
+python-markdown-mathjax
