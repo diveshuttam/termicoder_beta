@@ -4,6 +4,7 @@ from ..utils import config
 from ..utils import yaml
 from ..utils.logging import logger
 from ..utils.launch import launch
+from ..utils.load import get_default_code_name
 import os
 
 
@@ -28,7 +29,9 @@ def main(code_file, editor):
 
     Default CODE_FILE is <PROBLEM_NAME>.<DEFAULT_EXTENSION> if user is
     in a problem folder and no other supported code file exists.
-    If other code file(s) exist, it suggests to open the most
+
+    TODO [WIP]:
+    If other code file(s) exist, it should suggests to open the most
     recently edited one.
 
     Template for the code is loaded based upon extension.
@@ -37,12 +40,7 @@ def main(code_file, editor):
     editor, and language preferences.
     '''
     if code_file is None:
-        default_name = config.read('settings.yml', 'default_code_file')
-        if ".problem.yml" in os.listdir():
-            problem = yaml.read('.problem.yml')
-            default_name = problem.code + "." + config.read(
-                'settings.yml', 'default_extension')
-
+        default_name = get_default_code_name()
         code_file = click.prompt(
             "Please enter a file name", default=default_name)
 
