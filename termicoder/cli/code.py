@@ -45,7 +45,7 @@ def main(code_file, editor):
             type=click.Path(writable=True, dir_okay=False))
 
     extension = code_file.split('.')[-1]
-    template = config.read('code/templates/%s/template.yml' % extension)
+    template = config.read('lang/%s/template.yml' % extension)
     no_file_name = False
     if(template is not None):
         try:
@@ -76,11 +76,12 @@ def main(code_file, editor):
         except (AttributeError, KeyError):
             raise
     else:
-        logger.warn("You don't have templates setup for extension %s "
+        logger.warn("You don't have templates setup for extension %s."
                     "Launching empty file " % extension)
     if(not os.path.exists(code_file)):
         code = click.open_file(code_file, 'w')
-        code.write(code_to_write)
+        if(template is not None):
+            code.write(code_to_write)
     if no_file_name:
         code_file = ''
     launch(editor, code_file)

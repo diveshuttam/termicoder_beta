@@ -107,7 +107,7 @@ class Codechef(Judge):
         return self._make_url(self.url, contest_code,
                               'problems', problem_code)
 
-    def submit(self, problem, code_text):
+    def submit(self, problem, code_text, extension):
         # TODO : correct this
         logger.error("Codechef api doesn't support the submissions yet.\n"
                      "Please contact them to support this.\n"

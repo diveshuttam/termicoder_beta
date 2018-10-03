@@ -66,7 +66,9 @@ class Judge(ABC):
         pass
 
     @abstractmethod
-    def submit(self, problem, code_text):
+    def submit(self, problem, code_text, extension):
         # problem is an instance of judge's problem class
         # code test is the code to be submitted
+        # extension is the extension of the code file to determine
+        # language of submission
         pass

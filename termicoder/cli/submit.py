@@ -37,6 +37,7 @@ def main(code_file):
         )
 
     code = click.open_file(code_file).read()
+    extension = code_file.split(".")[-1]
     problem = yaml.read('.problem.yml')
     judge = judge_factory.get_judge(problem.judge_name)
-    judge.submit(problem, code)
+    judge.submit(problem, code, extension)
