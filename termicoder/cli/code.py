@@ -54,6 +54,7 @@ def main(code_file, editor):
             code_to_write = template['code']
             # allow jinja style template substitution in command
             # example {{row_no}} and {{col_no}}
+            # see settings.yml for info on usage
             if(isinstance(editor, list)):
                 for key in template:
                     value = template[key]
@@ -62,10 +63,13 @@ def main(code_file, editor):
                         args in editor
                     ]
                     logger.debug(editor)
-                f = [x for x in editor if r"{{FILENAME}}" in x]
+
+                # useful for sublime's go to line functionality
+                # see settings.yml for info on usage
+                f = [x for x in editor if r"{{CODE_FILE}}" in x]
                 if len(f) > 0:
                     editor = [
-                            args.replace(r"{{FILENAME}}", str(code_file)) for
+                            args.replace(r"{{CODE_FILE}}", str(code_file)) for
                             args in editor
                         ]
                     no_file_name = True
