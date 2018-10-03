@@ -48,7 +48,7 @@ def main(code_file, editor):
 
     extension = code_file.split('.')[-1]
     template = config.read('code/templates/%s/template.yml' % extension)
-
+    no_file_name = False
     if(template is not None):
         try:
             code_to_write = template['code']
@@ -62,6 +62,14 @@ def main(code_file, editor):
                         args in editor
                     ]
                     logger.debug(editor)
+                f = [x for x in editor if r"{{FILENAME}}" in x]
+                if len(f) > 0:
+                    editor = [
+                            args.replace(r"{{FILENAME}}", str(code_file)) for
+                            args in editor
+                        ]
+                    no_file_name = True
+                    logger.info(editor)
             logger.debug(code_to_write)
         except (AttributeError, KeyError):
             raise
@@ -71,4 +79,6 @@ def main(code_file, editor):
     if(not os.path.exists(code_file)):
         code = click.open_file(code_file, 'w')
         code.write(code_to_write)
+    if no_file_name:
+        code_file = ''
     launch(editor, code_file)

@@ -1,23 +1,32 @@
-# Value null => use default
-
-# Browser to launch a problem
+# Browser to launch a problem null => default
 browser: null
-
-# Editor to launch a problem
-editor: null
-
-# # Jinja style arguement substitutions are supproted while launching code_file
-# # in editor.
-# # example
-# editor:
-#   - vim
-#   - +{{row_no}}
-# # assuming row_no is defined with each of the templates
-# # you can define variable on your own in code templates and use here
-
 
 # Default file name extension for code
 default_extension: cpp
 
-# Default file name for non problem directories
+# Default code file name for non problem directories
 default_code_file: a.cpp
+
+# Editor to launch a problem null => default
+editor: null
+
+# # Jinja style argument list substitutions are supported
+# # while launching code_file in editor.
+# # example for vim
+# editor:
+#   - vim
+#   - +{{row_no}}
+
+# # example for sublime
+# editor:
+#   - subl
+#   - "{{FILENAME}}:{{row_no}}:{{col_no}}"
+
+# # assuming row_no is defined with each of the templates
+# # you can define variable on your own in code templates and use here
+# # FILENAME is a special variable which can be used if FILENAME is not the
+# # last argument. By default termicoder passes FILENAME as the last argument
+# # if {{FILENAME}} is used here it is just replaced and not PASSED
+
+
+
