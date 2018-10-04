@@ -14,6 +14,9 @@ default_code_file: a.cpp
 # # Editor to launch a problem null => default
 editor: null
 
+# # Sample configs
+# # TODO separate this as .patch files on termicoder-config repo
+
 # # Jinja style argument list substitutions are supported while
 # # launching CODE_FILE in editor.
 
@@ -38,6 +41,27 @@ editor: null
 # # CODE_FILE is a special variable which can be used if CODE_FILE is not the
 # # last argument. By default termicoder passes CODE_FILE as the last argument.
 # # if {{CODE_FILE}} is used here it is just replaced and not PASSED extra.
+
+# # Use the following config for using vscode as browser with
+# # extension for html preview such as:
+# # https://github.com/searKing/preview-vscode
+# # html preview is not enabled by default
+# # so sending key strokes ctrl+shift+v to vscode
+# # but in terminal this is paste so ctrl+p Escape first to change focus
+# browser:
+#   -
+#     - code
+#     - "--reuse-window"
+#     - "{{URL}}"
+#   -
+#     - sleep
+#     - "1"
+#   -
+#     - xdotool
+#     - key
+#     - ctrl+p
+#     - Escape
+#     - ctrl+shift+v
 
 
 
