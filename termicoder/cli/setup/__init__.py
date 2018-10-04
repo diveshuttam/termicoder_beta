@@ -3,10 +3,13 @@ from ...models import JudgeFactory
 from ...utils.setup import output_problem, output_contest
 from ...utils.constants import default_judge
 from ...utils.exceptions import handle_exceptions
+from ...utils.logging import logger
 
 judge_factory = JudgeFactory()
 OJs = judge_factory.available_judges
 
+if default_judge is None:
+    default_judge = OJs[0]
 
 @click.command()
 @click.option('-j', '--judge', 'judge_name', type=click.Choice(OJs),
@@ -51,6 +54,9 @@ def main(judge_name, contest, problem, status):
         contest = judge.get_contest(contest_code=contest)
         contest_directory = "."
         output_contest(contest, contest_directory)
+    elif(not contest and not problem and not status):
+        logger.warn('No arguments passed : assumed login')
+        judge.login()
 
 
 __all__ = ['main']

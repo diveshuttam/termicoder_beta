@@ -11,7 +11,7 @@ def readme():
 
 setup(
     name='termicoder',
-    version='0.2.2',
+    version='0.3.0',
     url='https://github.com/termicoder/termicoder',
     author='Divesh Uttamchandani',
     author_email='diveshuttamchandani@gmail.com',
@@ -19,7 +19,7 @@ setup(
     description='CLI to view, code & submit problems directly from terminal',
     long_description=readme(),
     long_description_content_type='text/markdown',
-    keywords='competitive iarcs codechef oj',
+    keywords='competitive codechef oj',
     classifiers=[
         'Development Status :: 3 - Alpha',
 
@@ -28,7 +28,6 @@ setup(
 
         'License :: OSI Approved :: MIT License',
 
-        'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
@@ -57,5 +56,10 @@ setup(
         termicoder=termicoder.cli:main
         [termicoder.judge_plugins]
         codechef=termicoder.judges:Codechef
-    '''
+    ''',
+    project_urls={
+        'Bug Reports': 'https://github.com/termicoder/termicoder/issues',
+        'Say Thanks!': 'https://saythanks.io/to/diveshuttam',
+        'Source': 'https://github.com/termicoder/termicoder/',
+    }
 )
