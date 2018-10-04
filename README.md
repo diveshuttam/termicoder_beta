@@ -23,28 +23,37 @@ Inspiration behind Termicoder
 
 ### User installation
 
-`pip install termicoder`
-use sudo -H if required. preferably use pip3 (python3)
+`pip3 install termicoder`
 
-### Developer installation
+### Developer installationhttps://github.com/termicoder/codechef-oauth
 
 - clone this repo
 - in the root folder of this repo run
-  - `pip install --editable .`
+  - `pip3 install --editable .`
 
 notice the dot(.) in above command at the end
 
-Note: it is better to use virtualenv and pip3 (python3)
+Note: it is better to use virtualenv
 
-- to remove this package, in the root folder of the repo run
+- to remove this package, in the root folder of the repo, run:
   - `python setup.py develop --uninstall`
 
 **Note: Termicoder is in its development stage and has only been tested on Ubuntu + python3. Support for other configurations is being worked on, if you are using some other platform and encounter errors, do create an [issue](https://github.com/diveshuttam/termicoder/issues) for them. For windows one can also try using [Bash on Ubuntu on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/about) ; most features have been tested out there and work as expected.**
 
-### Autocomplete for bash
+### Configuration
 
-To setup tab autocompletion for termicoder commands,
-see `termicoder config autocomplete --help`
+- After installing termicoder you have to initialize the configurations files. You can do this by
+  - `termicoder config init`
+
+- To edit configurations:
+  - `termicoder config edit`
+
+### Tab Autocompletion
+
+- To setup tab autocompletion for termicoder commands
+  - `termicoder config autocomplete --help`
+  -  the above currently supports autocompletions for `bash`, `fish`, `powershell`, `zsh` 
+
 
 ## Current Support
 
@@ -139,6 +148,11 @@ You can also contribute otherwise by
 This is a complete redesign and rewrite of _termicoder_ to support judges as plugins,
 As well as to support the new codechef API.
 
+This distribution currently includes judge plugin `codechef` implemented using
+[codechef api](http://developers.codechef.com/) for [codechef api hackathon powered by Alibaba](https://www.codechef.com/CAH1801). We are working on support for other judges.
+The API authentication backend for authenticating with CodeChef is hosted at https://termicoder.diveshuttam.me 
+whose source code can be found in [codechef-oauth](https://github.com/termicoder/codechef-oauth).
+
 Unlike [previous implementation](https://github.com/termicoder/termicoder/tree/previous_alpha) this
 completely does away with `exec` and `eval` calls. And implements `Judges`,
 `Problems` and `Contests` as classes instead of modules.
@@ -155,11 +169,9 @@ termicoder would be available soon. By then you can look at the
 See setup.py for example of how to subscribe to entry point
 `termicoder.judge_plugins`.
 
-This distribution currently includes judge plugin `codechef` implemented using
-[codechef api](http://developers.codechef.com/) for [codechef api hackathon powered by Alibaba](https://www.codechef.com/CAH1801)
-
 There are also many completely new features implemented in this version including
-`termicoder repl`, `termicoder config`, `termicoder clip`, `termicoder config autocomplete`
+`termicoder repl`, `termicoder config`, `termicoder clip`, `termicoder config autocomplete`.
+Also the configurations are now completely YAML based with support for jinja like substitutions.
 
 Though this implementation lacks support for colors as well as a few other
 features which were present in previous implementation.
