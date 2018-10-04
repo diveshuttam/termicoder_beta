@@ -22,6 +22,9 @@ class Testcase(ABC):
         out_list = [x+'\n' for x in out.split('\n')]
         diffobj = icdiff.ConsoleDiff(line_numbers=True, show_all_spaces=True)
 
-        return '\n'.join(diffobj.make_table(
-                            out_list, ans_list, fromdesc=out_file_name,
-                            todesc=ans_file_name, context=False, numlines=10))
+        if(ans_list == out_list):
+            return None
+        else:
+            return '\n'.join(diffobj.make_table(
+                             out_list, ans_list, fromdesc=out_file_name,
+                             todesc=ans_file_name, context=False, numlines=10))

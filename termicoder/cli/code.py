@@ -52,14 +52,12 @@ def main(code_file, editor):
             # allow jinja style template substitution in command
             # example {{row_no}} and {{col_no}}
             # see settings.yml for info on usage
-            template['code']=''
             status, editor = substitute(editor, template)
             # useful for sublime's go to line functionality
             # see settings.yml for info on usage
             status, editor = substitute(editor, {
                 r"CODE_FILE": code_file
             })
-            logger.error(editor)
             logger.debug(code_to_write)
         except (AttributeError, KeyError):
             logger.error("Probelm with template file")
