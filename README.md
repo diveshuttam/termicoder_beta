@@ -19,7 +19,7 @@ Inspiration behind Termicoder
   <img src="./images/inspiration.png">
 </p>
 
-## For installation refer [Installation](#installation)
+## For installation refer: [Install](#installation)
 
 ## NOTES ABOUT REIMPLEMENTATION
 
@@ -68,7 +68,7 @@ Previous implementation had version numbers `~0.2.*` and this implementation has
 version `~0.3.0`
 
 
-## Installation
+## Install
 
 ### User installation
 
