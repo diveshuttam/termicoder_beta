@@ -9,6 +9,7 @@ from .import style
 import os
 
 
+# TODO refractor code
 def test(code_file, timelimit, live, judge_factory):
     if '.problem.yml' not in os.listdir():
         logger.error("You should be in a problem directory to test")
@@ -76,7 +77,7 @@ def test(code_file, timelimit, live, judge_factory):
         testcase_files = []
 
     if live is True:
-        testcase_files = [sys.stdin]
+        testcase_files = ["stdin"]
 
     for testcase_file in testcase_files:
         if(live or testcase_file.endswith('.in')):
@@ -86,6 +87,7 @@ def test(code_file, timelimit, live, judge_factory):
                 inp_file = click.open_file(
                     os.path.join('testcases', "%s.in" % name))
                 inp = inp_file.read()
+                inp_file.seek(0)
                 try:
                     ans_file = click.open_file(
                         os.path.join('testcases', "%s.ans" % name))
@@ -122,7 +124,6 @@ def test(code_file, timelimit, live, judge_factory):
                     timelimit = problem.timelimit
 
                 logger.debug(run_command)
-
                 p = subprocess.run(run_command, stdin=inp_file,
                                    timeout=timelimit, check=True,
                                    stdout=out_file, stderr=out_file)
