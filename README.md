@@ -19,13 +19,62 @@ Inspiration behind Termicoder
   <img src="./images/inspiration.png">
 </p>
 
+## For installation refer [Installation](#installation)
+
+## NOTES ABOUT REIMPLEMENTATION
+
+This is a complete redesign and rewrite of [_termicoder_](https://github.com/termicoder/termicoder/tree/previous_alpha) to support judges as plugins,
+As well as to support the new codechef API.
+
+This distribution currently includes judge plugin `codechef` implemented using
+[codechef api](http://developers.codechef.com/) for [codechef api hackathon powered by Alibaba](https://www.codechef.com/CAH1801). We are working on support for other judges.
+
+The API authentication backend for authenticating with CodeChef is hosted at https://termicoder.diveshuttam.me 
+whose source code can be found in [codechef-oauth](https://github.com/termicoder/codechef-oauth).
+
+Unlike [previous implementation](https://github.com/termicoder/termicoder/tree/previous_alpha) this
+completely does away with `exec` and `eval` calls. And implements `Judges`,
+`Problems` and `Contests` as classes instead of modules.
+
+There is an abstract class `Judge` which is used to dispatch operations to a
+particular judge instance through `Judge Factory`.
+Developers can subclass and implement the `Judge` class externally
+and attach their module to setup tool entry-point - `termicoder.judge_plugins`.
+
+Termicoder dynamically loads these judges and dispatches the operations.
+Complete documentation for writing judge-plugins and the UML design docs for
+termicoder would be available soon. By then you can look at the
+`termicoder/judges/codechef` in this repo for an example implementation.
+See setup.py for example of how to subscribe to entry point
+`termicoder.judge_plugins`.
+
+There are also many completely new features implemented in this version including
+`termicoder repl`, `termicoder config`, `termicoder clip`, `termicoder config autocomplete`.
+Also the configurations are now completely YAML based with support for jinja like substitutions.
+
+Though this implementation lacks support for colors as well as a few other
+features which were present in previous implementation.
+This is mostly due to time constraint of the hackathon. Codechef API
+severely limits requests per time which slows down development.
+We will try to get it running, once we have tested and perfected the
+api based features.
+
+A base version for this repo(`0.3.0`) has been published,
+Further developement is being done on [main termicoder repo](https://github.com/termicoder/termicoder).
+
+You can use previous implementation of termicoder by specifying the version while pip
+installation.
+Previous implementation had version numbers `~0.2.*` and this implementation has
+version `~0.3.0`
+
+
 ## Installation
 
 ### User installation
 
 `pip3 install termicoder`
 
-### Developer installationhttps://github.com/termicoder/codechef-oauth
+### Developer installation
 
 - clone this repo
 - in the root folder of this repo run
@@ -143,48 +192,5 @@ You can also contribute otherwise by
 
 [MIT](LICENSE.txt)
 
-## NOTE
 
-This is a complete redesign and rewrite of _termicoder_ to support judges as plugins,
-As well as to support the new codechef API.
-
-This distribution currently includes judge plugin `codechef` implemented using
-[codechef api](http://developers.codechef.com/) for [codechef api hackathon powered by Alibaba](https://www.codechef.com/CAH1801). We are working on support for other judges.
-The API authentication backend for authenticating with CodeChef is hosted at https://termicoder.diveshuttam.me 
-whose source code can be found in [codechef-oauth](https://github.com/termicoder/codechef-oauth).
-
-Unlike [previous implementation](https://github.com/termicoder/termicoder/tree/previous_alpha) this
-completely does away with `exec` and `eval` calls. And implements `Judges`,
-`Problems` and `Contests` as classes instead of modules.
-
-There is an abstract class `Judge` which is used to dispatch operations to a
-particular judge instance through `Judge Factory`.
-Developers can subclass and implement the `Judge` class externally
-and attach their module to setup tool entry-point - `termicoder.judge_plugins`.
-
-Termicoder dynamically loads these judges and dispatches the operations.
-Complete documentation for writing judge-plugins and the UML design docs for
-termicoder would be available soon. By then you can look at the
-`termicoder/judges/codechef` in this repo for an example implementation.
-See setup.py for example of how to subscribe to entry point
-`termicoder.judge_plugins`.
-
-There are also many completely new features implemented in this version including
-`termicoder repl`, `termicoder config`, `termicoder clip`, `termicoder config autocomplete`.
-Also the configurations are now completely YAML based with support for jinja like substitutions.
-
-Though this implementation lacks support for colors as well as a few other
-features which were present in previous implementation.
-This is mostly due to time constraint of the hackathon. Codechef API
-severely limits requests per time which slows down development.
-We will try to get it running, once we have tested and perfected the
-api based features.
-
-A base version for this repo(`0.3.0`) has been published,
-Further developement is being done on [main termicoder repo](https://github.com/termicoder/termicoder).
-
-You can use previous implementation of termicoder by specifying the version while pip
-installation.
-Previous implementation had version numbers `~0.2.*` and this implementation has
-version `~0.3.0`
 
