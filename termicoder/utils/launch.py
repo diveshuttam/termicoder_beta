@@ -13,6 +13,7 @@ def launch(app_args, url):
         if(not isinstance(app_args, list)):
             args = [app_args]
         logger.info('Launching %s with %s' % (url, ' '.join(args)))
-        args.append(url)
+        if url not in [None, '']:
+            args.append(url)
         logger.debug(args)
         subprocess.run(args)

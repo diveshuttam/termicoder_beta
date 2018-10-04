@@ -2,8 +2,8 @@
 # jinja templates in setting
 # specifically row_no can be used while defining editor to open the editor
 # at a specific row
-row_no: 7
-col_no: 4
+row_no: 6
+col_no: 19
 code: |
   # Author:      YourName
   # Institution: YourInstitute

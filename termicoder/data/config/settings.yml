@@ -27,6 +27,12 @@ editor: null
 #   - subl
 #   - "{{CODE_FILE}}:{{row_no}}:{{col_no}}"
 
+# # example for vscode
+# editor:
+#   - code
+#   - "--reuse-window"
+#   - "--goto"
+#   - "{{CODE_FILE}}:{{row_no}}:{{col_no}}"
 # # above is assuming: row_no OR col_no is defined with each of the templates.
 # # You can also define variable on your own in code templates and use here
 # # CODE_FILE is a special variable which can be used if CODE_FILE is not the
