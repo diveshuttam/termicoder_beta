@@ -139,7 +139,7 @@ You can also contribute otherwise by
 This is a complete redesign and rewrite of _termicoder_ to support judges as plugins,
 As well as to support the new codechef API.
 
-Unlike [previous implementation](https://github.com/termicoder/termicoder) this
+Unlike [previous implementation](https://github.com/termicoder/termicoder/tree/previous_alpha) this
 completely does away with `exec` and `eval` calls. And implements `Judges`,
 `Problems` and `Contests` as classes instead of modules.
 
@@ -168,10 +168,11 @@ severely limits requests per time which slows down development.
 We will try to get it running, once we have tested and perfected the
 api based features.
 
-This repo code will replace the [main termicoder repo](https://github.com/termicoder/termicoder) after this is perfected
+A base version for this repo(`0.3.0`) has been published,
+Further developement is being done on [main termicoder repo](https://github.com/termicoder/termicoder).
 
 You can use previous implementation of termicoder by specifying the version while pip
 installation.
-Previous implementation had version numbers `~0.2.*` and current implementation has
-versions `~0.3.*`
-Once all primary features are implemented we will shift to beta versions `~0.9.*` for develop branch and stable versions `~1.0.*` for master branch
+Previous implementation had version numbers `~0.2.*` and this implementation has
+version `~0.3.0`
+
