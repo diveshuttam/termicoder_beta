@@ -3,7 +3,7 @@ from ...models import JudgeFactory
 from ...utils.constants import default_judge
 from ...utils.exceptions import handle_exceptions
 from ...utils import config
-from ...utils.launch import launch
+from ...utils.launch import launch, substitute
 
 judge_factory = JudgeFactory()
 OJs = judge_factory.available_judges
@@ -23,4 +23,8 @@ def main(judge_name, browser):
 
     judge = judge_factory.get_judge(judge_name)
     contest_url = judge.get_contests_list_url()
+    keymap = {
+       r"{{URL}}": contest_url
+    }
+    browser = substitute(browser, keymap)
     launch(browser, contest_url)

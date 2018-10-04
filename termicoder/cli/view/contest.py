@@ -4,7 +4,7 @@ from ...utils.constants import default_judge
 from ...utils.logging import logger
 from ...utils.exceptions import handle_exceptions
 from ...utils import config
-from ...utils.launch import launch
+from ...utils.launch import launch, substitute
 
 judge_factory = JudgeFactory()
 OJs = judge_factory.available_judges
@@ -25,5 +25,9 @@ def main(judge_name, contest_code, browser):
     '''
     judge = judge_factory.get_judge(judge_name)
     contest_url = judge.get_contest_url(contest_code=contest_code)
+    keymap = {
+       r"{{URL}}": contest_url
+    }
+    browser = substitute(browser, keymap)
     logger.debug('launching %s' % contest_url)
     launch(browser, contest_url)

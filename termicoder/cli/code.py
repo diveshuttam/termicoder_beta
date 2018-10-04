@@ -2,7 +2,7 @@ import click
 from ..utils.exceptions import handle_exceptions
 from ..utils import config
 from ..utils.logging import logger
-from ..utils.launch import launch
+from ..utils.launch import launch, substitute
 from ..utils.load import get_default_code_name
 import os
 
@@ -53,28 +53,18 @@ def main(code_file, editor):
             # allow jinja style template substitution in command
             # example {{row_no}} and {{col_no}}
             # see settings.yml for info on usage
-            if(isinstance(editor, list)):
-                for key in template:
-                    value = template[key]
-                    editor = [
-                        args.replace("{{%s}}" % key, str(value)) for
-                        args in editor
-                    ]
-                    logger.debug(editor)
-
-                # useful for sublime's go to line functionality
-                # see settings.yml for info on usage
-                f = [x for x in editor if r"{{CODE_FILE}}" in x]
-                if len(f) > 0:
-                    editor = [
-                            args.replace(r"{{CODE_FILE}}", str(code_file)) for
-                            args in editor
-                        ]
-                    no_file_name = True
-                    logger.info(editor)
+            editor = substitute(editor, template)
+            editor = substitute(editor, {
+                r"{{CODE_FILE}}": code_file
+            })
+            # useful for sublime's go to line functionality
+            # see settings.yml for info on usage
+            f = [x for x in editor if r"{{CODE_FILE}}" in x]
+            if len(f) > 0:
+                no_file_name = True
             logger.debug(code_to_write)
         except (AttributeError, KeyError):
-            raise
+            logger.error("Probelm with template file")
     else:
         logger.warn("You don't have templates setup for extension %s."
                     "Launching empty file " % extension)
