@@ -31,6 +31,8 @@ def output_testcase(testcase, testcase_dir):
     logger.debug('writing testcase %s for problem' % (testcase.code))
     inp_file.write(testcase.inp)
     ans_file.write(testcase.ans)
+    inp_file.close()
+    ans_file.close()
 
 
 # judge_name is required for instantiating it back from file
@@ -56,6 +58,7 @@ def output_problem(problem, problem_dir):
     html_file = click.open_file(html_path, 'w')
     logger.debug('writing html for %s' % problem.code)
     html_file.write(problem.html)
+    html_file.close()
     testcase_path = os.path.join(directory_path, 'testcases')
     for testcase in problem.testcases:
         output_testcase(testcase, testcase_path)

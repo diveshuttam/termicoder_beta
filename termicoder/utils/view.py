@@ -14,7 +14,7 @@ def folder(directory, browser_local):
 
     elif '.contest.yml' in os.listdir(directory):
         contest = yaml.read(os.path.join(directory, '.contest.yml'))
-        logger.debug('launching contest %s' % contest.name)
+        logger.debug('launching contest %s' % contest.code)
         url = directory
 
     else:

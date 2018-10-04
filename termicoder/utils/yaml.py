@@ -16,6 +16,7 @@ def read(file_path, key=None, safe=False):
     value = None
     try:
         data = yaml.load(data_file, Loader=Loader)
+        data_file.close()
         logger.debug("read data from file %s" % file_path)
         logger.debug(data)
         logger.debug(key)

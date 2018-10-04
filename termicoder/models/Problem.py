@@ -8,6 +8,9 @@ from abc import ABC, abstractmethod
 class Problem(ABC):
     @abstractmethod
     def __init__(self, data):
+        self.name = None
+        self.status = None
+        self.submissions_count = 0
         self.data = data
         self.code = None
         self.html = None

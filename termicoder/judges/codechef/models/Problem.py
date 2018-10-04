@@ -13,6 +13,9 @@ class CodechefProblem(Problem):
         self.code = None
         self.data = data
         self.html = None
+        self.name = None
+        self.status = None
+        self.submission_count = 0
         self.testcases = None
         self.judge_name = "codechef"
         self.timelimit = 3.0
@@ -23,6 +26,8 @@ class CodechefProblem(Problem):
         concerned_data = self.data['result']['data']['content']
         problem_content = namedtuple(
             "problem", concerned_data.keys())(*concerned_data.values())
+        self.name = problem_content.problemName
+        self.submissions_count = problem_content.successfulSubmissions
         self.code = problem_content.problemCode
         self.text = problem_content.body
         self.html = self._get_html(problem_content.body)
