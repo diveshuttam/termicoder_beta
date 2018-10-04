@@ -20,4 +20,5 @@ def main(judge):
     depending on judge it may give a list of categories also
     such as PRACTICE etc.
     '''
-    raise NotImplementedError
+    logger.error('Not implemented list contest in this version')
+    return

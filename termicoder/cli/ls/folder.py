@@ -2,7 +2,7 @@ import click
 from ...utils.logging import logger
 from ...utils.exceptions import handle_exceptions
 from ...utils.yaml import read
-import os
+import subprocess
 
 
 @click.command(short_help="View contents of folder.")
@@ -17,6 +17,5 @@ def main(dir):
     if it is a contest folder it displays the list of problems.
     if its a problem folder, displays the problem in a browser.
     '''
-
-    raise NotImplementedError
-    # viewthis_module.view(folder, edit_defaults)
+    logger.warn('Dummy list in this version')
+    subprocess.run(['ls', '-l', dir])
