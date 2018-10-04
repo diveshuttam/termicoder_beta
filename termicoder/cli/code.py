@@ -2,7 +2,7 @@ import click
 from ..utils.exceptions import handle_exceptions
 from ..utils import config
 from ..utils.logging import logger
-from ..utils.launch import launch
+from ..utils.launch import launch, substitute
 from ..utils.load import get_default_code_name
 import os
 
@@ -46,35 +46,23 @@ def main(code_file, editor):
 
     extension = code_file.split('.')[-1]
     template = config.read('lang/%s/template.yml' % extension)
-    no_file_name = False
     if(template is not None):
         try:
             code_to_write = template['code']
             # allow jinja style template substitution in command
             # example {{row_no}} and {{col_no}}
             # see settings.yml for info on usage
-            if(isinstance(editor, list)):
-                for key in template:
-                    value = template[key]
-                    editor = [
-                        args.replace("{{%s}}" % key, str(value)) for
-                        args in editor
-                    ]
-                    logger.debug(editor)
-
-                # useful for sublime's go to line functionality
-                # see settings.yml for info on usage
-                f = [x for x in editor if r"{{CODE_FILE}}" in x]
-                if len(f) > 0:
-                    editor = [
-                            args.replace(r"{{CODE_FILE}}", str(code_file)) for
-                            args in editor
-                        ]
-                    no_file_name = True
-                    logger.info(editor)
+            template['code']=''
+            status, editor = substitute(editor, template)
+            # useful for sublime's go to line functionality
+            # see settings.yml for info on usage
+            status, editor = substitute(editor, {
+                r"CODE_FILE": code_file
+            })
+            logger.error(editor)
             logger.debug(code_to_write)
         except (AttributeError, KeyError):
-            raise
+            logger.error("Probelm with template file")
     else:
         logger.warn("You don't have templates setup for extension %s."
                     "Launching empty file " % extension)
@@ -82,6 +70,6 @@ def main(code_file, editor):
         code = click.open_file(code_file, 'w')
         if(template is not None):
             code.write(code_to_write)
-    if no_file_name:
+    if status:
         code_file = ''
     launch(editor, code_file)

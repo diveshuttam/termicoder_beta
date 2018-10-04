@@ -1,7 +1,7 @@
 from .logging import logger
 import os
 from . import yaml
-from .launch import launch
+from .launch import launch, substitute
 
 
 def folder(directory, browser):
@@ -21,5 +21,10 @@ def folder(directory, browser):
         logger.error(".problem.yml and .contest.yml not found in folder")
         logger.error("Please make sure you are in correct directory")
         return
-
+    keymap = {
+       "URL": url
+    }
+    status, browser = substitute(browser, keymap)
+    if status is True:
+        url = ''
     launch(browser, url)
