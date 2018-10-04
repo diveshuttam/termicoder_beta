@@ -22,9 +22,11 @@ def main(judge_name, browser):
     '''
 
     judge = judge_factory.get_judge(judge_name)
-    contest_url = judge.get_contests_list_url()
+    contest_list_url = judge.get_contests_list_url()
     keymap = {
-       r"{{URL}}": contest_url
+        'URL': contest_list_url
     }
-    browser = substitute(browser, keymap)
+    status, browser = substitute(browser, keymap)
+    if status is True:
+        contest_url = ''
     launch(browser, contest_url)

@@ -46,22 +46,20 @@ def main(code_file, editor):
 
     extension = code_file.split('.')[-1]
     template = config.read('lang/%s/template.yml' % extension)
-    no_file_name = False
     if(template is not None):
         try:
             code_to_write = template['code']
             # allow jinja style template substitution in command
             # example {{row_no}} and {{col_no}}
             # see settings.yml for info on usage
-            editor = substitute(editor, template)
-            editor = substitute(editor, {
-                r"{{CODE_FILE}}": code_file
-            })
+            template['code']=''
+            status, editor = substitute(editor, template)
             # useful for sublime's go to line functionality
             # see settings.yml for info on usage
-            f = [x for x in editor if r"{{CODE_FILE}}" in x]
-            if len(f) > 0:
-                no_file_name = True
+            status, editor = substitute(editor, {
+                r"CODE_FILE": code_file
+            })
+            logger.error(editor)
             logger.debug(code_to_write)
         except (AttributeError, KeyError):
             logger.error("Probelm with template file")
@@ -72,6 +70,6 @@ def main(code_file, editor):
         code = click.open_file(code_file, 'w')
         if(template is not None):
             code.write(code_to_write)
-    if no_file_name:
+    if status:
         code_file = ''
     launch(editor, code_file)

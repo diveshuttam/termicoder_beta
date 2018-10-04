@@ -24,7 +24,7 @@ def folder(directory, browser):
     keymap = {
        "URL": url
     }
-    did_substi, browser = substitute(browser, keymap)
-    if did_substi:
+    status, browser = substitute(browser, keymap)
+    if status is True:
         url = ''
     launch(browser, url)

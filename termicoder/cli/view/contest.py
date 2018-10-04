@@ -26,8 +26,10 @@ def main(judge_name, contest_code, browser):
     judge = judge_factory.get_judge(judge_name)
     contest_url = judge.get_contest_url(contest_code=contest_code)
     keymap = {
-       r"{{URL}}": contest_url
+        "URL": contest_url
     }
-    browser = substitute(browser, keymap)
     logger.debug('launching %s' % contest_url)
+    status, browser = substitute(browser, keymap)
+    if status is True:
+        contest_url = ''
     launch(browser, contest_url)
