@@ -49,6 +49,8 @@ setup(
         'pyperclip',
         'beautifultable',
         'Markdown',
+        'Tomd',
+        'mdv'
     ],
     entry_points='''
         [console_scripts]

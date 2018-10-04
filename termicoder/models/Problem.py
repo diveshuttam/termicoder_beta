@@ -10,4 +10,13 @@ class Problem(ABC):
     def __init__(self, data):
         self.data = data
         self.code = None
+        self.html = None
+        self.testcases = None
+        self.contest_code = None
+        self.judge_name = None
         self.timelimit = 3.0  # in seconds
+
+    # used by list
+    @abstractmethod
+    def __str__(self):
+        pass

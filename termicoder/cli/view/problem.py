@@ -17,7 +17,7 @@ OJs = judge_factory.available_judges
               default=default_judge)
 @click.option('-c', '--contest', type=click.STRING, help="contest code")
 @click.option("--browser", help='Browser to launch',
-              default=config.read('settings.yml', 'browser'))
+              default=config.read('settings.yml', 'browser_online'))
 @click.argument('PROBLEM_CODE')
 @handle_exceptions(BaseException)
 def main(judge_name, contest, problem_code, browser):

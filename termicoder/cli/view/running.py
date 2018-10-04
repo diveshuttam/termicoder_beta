@@ -14,7 +14,7 @@ OJs = judge_factory.available_judges
               prompt="Please provide a judge ("+'|'.join(OJs)+")",
               default=default_judge, show_default=True)
 @click.option("--browser", help='Browser to launch',
-              default=config.read('settings.yml', 'browser'))
+              default=config.read('settings.yml', 'browser_online'))
 @handle_exceptions(BaseException)
 def main(judge_name, browser):
     '''

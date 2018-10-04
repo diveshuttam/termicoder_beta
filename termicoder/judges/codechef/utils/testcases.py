@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 from termicoder.utils.logging import logger
 
 
+# Many corner cases are being handled in extracting testcases
+# maybe we can implement our own parser here instead of using
+# beautiful soup. Most type of problems should be extracted
 def extract(html):
     logger.debug("extract is being called")
     soup = BeautifulSoup(html, "html.parser")

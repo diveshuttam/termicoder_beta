@@ -4,7 +4,7 @@ from . import yaml
 from .launch import launch, substitute
 
 
-def folder(directory, browser):
+def folder(directory, browser_local):
     # TODO later migrate to flask based server
     logger.debug(os.listdir(directory))
     url = None
@@ -22,9 +22,9 @@ def folder(directory, browser):
         logger.error("Please make sure you are in correct directory")
         return
     keymap = {
-       "URL": url
+       "FILE": url
     }
-    status, browser = substitute(browser, keymap)
+    status, browser_local = substitute(browser_local, keymap)
     if status is True:
         url = ''
-    launch(browser, url)
+    launch(browser_local, url)

@@ -46,8 +46,3 @@ def write(rel_path, key, value):
     if(os.path.exists(data_path) is False):
         raise FileNotFoundError
     value = localYAML.write(data_path, key, value)
-
-
-# just for testing purposes
-if __name__ == "__main__":
-    write('settings.yml', 'browser', None)
