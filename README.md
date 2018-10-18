@@ -19,7 +19,7 @@ Inspiration behind Termicoder
   <img src="./images/inspiration.png">
 </p>
 
-## For installation refer: [Install](#installation)
+## For installation refer: [Install](#install)
 
 ## NOTES ABOUT REIMPLEMENTATION
 
